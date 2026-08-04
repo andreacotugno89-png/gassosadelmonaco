@@ -578,10 +578,10 @@ export default function App() {
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <Reveal>
             <Quatrefoil size={26} color={C.magenta} className="mx-auto mb-8" />
-            <p className="gdm-display leading-tight" style={{ color: C.cream, fontSize: "clamp(1.9rem,5vw,3.4rem)", fontWeight: 600 }}>
-              Una ricetta <span style={{ color: C.magenta }}>semplice</span>, custodita dal{" "}
-              <span style={{ color: C.magenta }}>tempo</span>, ritrovata nel{" "}
-              <span style={{ color: C.magenta }}>gusto</span>.
+            <p className="gdm-display leading-tight" style={{ color: C.cream, fontSize: "clamp(1.75rem,4.6vw,3.1rem)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.02em" }}>
+              Una ricetta <span style={{ color: C.magenta, fontWeight: 700 }}>semplice</span>, custodita dal{" "}
+              <span style={{ color: C.magenta, fontWeight: 700 }}>tempo</span>, ritrovata nel{" "}
+              <span style={{ color: C.magenta, fontWeight: 700 }}>gusto</span>.
             </p>
           </Reveal>
         </div>
