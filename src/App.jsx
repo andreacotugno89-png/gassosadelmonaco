@@ -609,14 +609,16 @@ export default function App() {
       </section>
 
       {/* ===================== FOTO ===================== */}
-      <section className="relative overflow-hidden" style={{ background: C.cream }}>
-        <img
-          src={ASSETS.lifestyle}
-          alt="Gassosa del Monaco servita con limoni e menta"
-          loading="lazy"
-          className="w-full object-cover"
-          style={{ height: "clamp(360px, 72vh, 760px)", objectPosition: "center 42%", display: "block" }}
-        />
+      <section className="relative overflow-hidden py-16 md:py-24" style={{ background: C.cream }}>
+        <Reveal className="max-w-6xl mx-auto px-6">
+          <img
+            src={ASSETS.lifestyle}
+            alt="Gassosa del Monaco servita con limoni e menta"
+            loading="lazy"
+            className="w-full h-auto mx-auto rounded-sm"
+            style={{ maxWidth: 620, display: "block", boxShadow: "0 20px 55px rgba(14,74,67,0.18)" }}
+          />
+        </Reveal>
       </section>
 
       {/* ===================== ANTICA RICETTA ===================== */}
