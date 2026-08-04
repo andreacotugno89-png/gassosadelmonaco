@@ -14,6 +14,13 @@ const ASSETS = {
   storia3:   "https://i.postimg.cc/YqgPPrrC/storia-famiglia.jpg",
 };
 
+/* Contatti */
+const CONTATTI = {
+  email:   "dipasquale1912@gmail.com",
+  tel:     "+39 333 381 5608",
+  telHref: "+393333815608",
+};
+
 /* Palette di marca — colori ufficiali */
 const C = {
   green:  "#0e4a43",
@@ -676,10 +683,14 @@ export default function App() {
             </p>
           </Reveal>
           <Reveal delay={140}>
-            <div className="flex flex-wrap gap-4 justify-center mt-9">
-              <a href="#top" className="gdm-cinzel text-[13px] tracking-[0.14em] uppercase px-8 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5"
-                style={{ background: C.magenta, color: "#fff", boxShadow: "0 8px 24px rgba(210,53,102,0.32)" }}>
-                Contattaci
+            <div className="flex flex-col items-center gap-3 mt-10">
+              <a href={`mailto:${CONTATTI.email}`} className="gdm-display transition-opacity duration-300 hover:opacity-70"
+                style={{ color: C.cream, fontSize: "clamp(1.05rem,3vw,1.5rem)", fontWeight: 600, letterSpacing: "0.01em" }}>
+                {CONTATTI.email}
+              </a>
+              <a href={`tel:${CONTATTI.telHref}`} className="gdm-display transition-opacity duration-300 hover:opacity-70"
+                style={{ color: C.magenta, fontSize: "clamp(1.05rem,3vw,1.5rem)", fontWeight: 700, letterSpacing: "0.01em" }}>
+                {CONTATTI.tel}
               </a>
             </div>
           </Reveal>
