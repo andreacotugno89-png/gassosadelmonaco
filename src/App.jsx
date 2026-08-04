@@ -8,6 +8,7 @@ const ASSETS = {
   logo:      "./assets/logo-dipasquale-1912.png",
   seal:      "https://i.postimg.cc/RVR7hyGs/tappo-off.png",
   signature: "./assets/firma-giuseppe-dipasquale.png",
+  logoWhite: "./assets/logo-bianco.png",
   storia1:   "https://i.postimg.cc/dV292Dq6/storia-campi.jpg",
   storia2:   "https://i.postimg.cc/2yLQVSc7/storia-piazza.jpg",
   storia3:   "https://i.postimg.cc/YqgPPrrC/storia-famiglia.jpg",
@@ -256,6 +257,18 @@ function Logo({ onDark = false, className = "h-9 w-auto md:h-10" }) {
     <div className="gdm-cinzel leading-none">
       <div style={{ color: onDark ? C.cream : C.green, letterSpacing: "0.04em" }} className="text-base md:text-lg font-bold">DI PASQUALE</div>
       <div style={{ color: onDark ? C.cream : C.magenta }} className="text-sm md:text-base font-bold">1912</div>
+    </div>
+  );
+}
+
+/* ---------- logo bianco per fondi scuri (footer) ---------- */
+function LogoWhite({ className = "h-14 md:h-16 w-auto" }) {
+  const [err, setErr] = useState(false);
+  if (!err) return <img src={ASSETS.logoWhite} onError={() => setErr(true)} alt="Di Pasquale 1912" className={className} />;
+  return (
+    <div className="gdm-cinzel leading-none">
+      <div style={{ color: C.cream, letterSpacing: "0.04em" }} className="text-lg md:text-xl font-bold">DI PASQUALE</div>
+      <div style={{ color: C.magenta }} className="text-base md:text-lg font-bold">1912</div>
     </div>
   );
 }
@@ -677,10 +690,7 @@ export default function App() {
       <footer className="py-12" style={{ background: C.greenD }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="gdm-cinzel leading-none">
-              <div style={{ color: C.cream, letterSpacing: "0.04em" }} className="text-lg md:text-xl font-bold">DI PASQUALE</div>
-              <div style={{ color: C.magenta }} className="text-base md:text-lg font-bold">1912</div>
-            </div>
+            <LogoWhite />
             <div className="gdm-cinzel text-[11px] tracking-[0.18em] uppercase text-center" style={{ color: "rgba(242,230,210,0.65)" }}>
               Bibita analcolica gassata
             </div>
@@ -689,9 +699,6 @@ export default function App() {
           <div className="mt-8 pt-8 text-center space-y-2" style={{ borderTop: "1px solid rgba(242,230,210,0.12)" }}>
             <p className="text-sm" style={{ color: "rgba(242,230,210,0.6)" }}>
               Ricetta originale ideata da Giuseppe di Pasquale — Bovino (FG), 1912
-            </p>
-            <p className="text-sm" style={{ color: "rgba(242,230,210,0.6)" }}>
-              Prodotto da: N. REA 134081 — Via del Gallitello, 39 — Potenza, Italia
             </p>
             <p className="text-xs pt-3" style={{ color: "rgba(242,230,210,0.4)" }}>
               © {new Date().getFullYear()} Gassosa del Monaco · Di Pasquale 1912
