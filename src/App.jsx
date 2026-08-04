@@ -614,8 +614,8 @@ export default function App() {
           src={ASSETS.lifestyle}
           alt="Gassosa del Monaco servita con limoni e menta"
           loading="lazy"
-          className="w-full object-cover"
-          style={{ height: "clamp(360px, 72vh, 760px)", objectPosition: "center 42%", display: "block" }}
+          className="w-full h-screen object-cover"
+          style={{ objectPosition: "center 42%", display: "block" }}
         />
       </section>
 
