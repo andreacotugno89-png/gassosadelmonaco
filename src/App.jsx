@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useId } from "react";
-
+ 
 /* ============================================================
    ASSET
    ============================================================ */
@@ -14,14 +14,14 @@ const ASSETS = {
   storia2:   "https://i.postimg.cc/2yLQVSc7/storia-piazza.jpg",
   storia3:   "https://i.postimg.cc/YqgPPrrC/storia-famiglia.jpg",
 };
-
+ 
 /* Contatti */
 const CONTATTI = {
   email:   "dipasquale1912@gmail.com",
   tel:     "+39 333 381 5608",
   telHref: "+393333815608",
 };
-
+ 
 /* Palette di marca — colori ufficiali */
 const C = {
   green:  "#0e4a43",
@@ -32,7 +32,7 @@ const C = {
   brown:  "#4A3526",
   ink:    "#0e3630",
 };
-
+ 
 const BUBBLES = [
   { l: 18, s: 10, d: 0,   t: 7.5 }, { l: 30, s: 6,  d: 1.2, t: 6.4 },
   { l: 42, s: 14, d: 0.4, t: 8.6 }, { l: 52, s: 8,  d: 2.1, t: 7.0 },
@@ -41,7 +41,7 @@ const BUBBLES = [
   { l: 58, s: 9,  d: 1.0, t: 7.8 }, { l: 36, s: 12, d: 2.3, t: 8.4 },
   { l: 68, s: 6,  d: 0.6, t: 6.6 }, { l: 22, s: 8,  d: 1.9, t: 7.2 },
 ];
-
+ 
 /* ---------- reveal on scroll ---------- */
 function Reveal({ children, className = "", delay = 0 }) {
   const ref = useRef(null);
@@ -63,7 +63,7 @@ function Reveal({ children, className = "", delay = 0 }) {
     </div>
   );
 }
-
+ 
 /* ---------- scritta ufficiale Gassosa del Monaco (SVG inline) ---------- */
 function WordmarkImg({ className = "" }) {
   const G = "#0e4a43", M = "#d23566";
@@ -95,7 +95,7 @@ function WordmarkImg({ className = "" }) {
     </svg>
   );
 }
-
+ 
 /* ---------- marchio quadrilobo ---------- */
 function Quatrefoil({ size = 28, color = C.magenta, className = "", style = {} }) {
   const petal = "M50 50 C 40 38, 38 18, 50 2 C 62 18, 60 38, 50 50 Z";
@@ -107,7 +107,7 @@ function Quatrefoil({ size = 28, color = C.magenta, className = "", style = {} }
     </svg>
   );
 }
-
+ 
 /* ---------- decori d'archivio: timbro tondo e marca da bollo ---------- */
 function StampCircle({ size = 220, color = C.green, className = "", style = {} }) {
   const id = useId().replace(/:/g, "");
@@ -132,7 +132,7 @@ function StampCircle({ size = 220, color = C.green, className = "", style = {} }
     </svg>
   );
 }
-
+ 
 function RevenueStamp({ size = 150, color = C.magenta, className = "", style = {} }) {
   const teeth = 14;
   const step = 100 / teeth;
@@ -160,7 +160,7 @@ function RevenueStamp({ size = 150, color = C.magenta, className = "", style = {
     </svg>
   );
 }
-
+ 
 /* ---------- icone ingredienti ---------- */
 function IngredientIcon({ kind, size = 34, color = C.green }) {
   const common = { fill: "none", stroke: color, strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" };
@@ -186,7 +186,7 @@ function IngredientIcon({ kind, size = 34, color = C.green }) {
     </svg>
   );
 }
-
+ 
 /* ---------- sigillo Di Pasquale (immagine ufficiale + fallback SVG) ---------- */
 function SealLogo({ size = 200, className = "", style = {} }) {
   const [err, setErr] = useState(false);
@@ -220,7 +220,7 @@ function SealLogo({ size = 200, className = "", style = {} }) {
     </svg>
   );
 }
-
+ 
 /* ---------- texture archi déco (pattern SVG generato) ---------- */
 function BrandTexture({ opacity = 1, className = "", bg = null, line = null }) {
   const id = useId().replace(/:/g, "");
@@ -256,7 +256,7 @@ function BrandTexture({ opacity = 1, className = "", bg = null, line = null }) {
     </svg>
   );
 }
-
+ 
 /* ---------- logo ---------- */
 function Logo({ onDark = false, className = "h-9 w-auto md:h-10" }) {
   const [err, setErr] = useState(false);
@@ -268,7 +268,7 @@ function Logo({ onDark = false, className = "h-9 w-auto md:h-10" }) {
     </div>
   );
 }
-
+ 
 /* ---------- logo bianco per fondi scuri (footer) ---------- */
 function LogoWhite({ className = "h-14 md:h-16 w-auto" }) {
   const [err, setErr] = useState(false);
@@ -280,7 +280,7 @@ function LogoWhite({ className = "h-14 md:h-16 w-auto" }) {
     </div>
   );
 }
-
+ 
 /* ---------- bottiglia ---------- */
 function BottleArt({ className = "" }) {
   return (
@@ -317,7 +317,7 @@ function BottleArt({ className = "" }) {
     </svg>
   );
 }
-
+ 
 function HeroBottle() {
   const [err, setErr] = useState(false);
   if (err) {
@@ -337,7 +337,7 @@ function HeroBottle() {
     />
   );
 }
-
+ 
 /* ---------- immagine d'archivio ---------- */
 function ArchiveImg({ src, alt, caption, className = "" }) {
   const [err, setErr] = useState(false);
@@ -355,7 +355,7 @@ function ArchiveImg({ src, alt, caption, className = "" }) {
   }
   return <img src={src} alt={alt} onError={() => setErr(true)} loading="lazy" className={`object-cover ${className}`} style={{ filter: "sepia(0.12) contrast(1.02)" }} />;
 }
-
+ 
 /* ---------- carosello d'archivio ---------- */
 function ArchiveCarousel({ slides }) {
   const [i, setI] = useState(0);
@@ -371,13 +371,13 @@ function ArchiveCarousel({ slides }) {
             </div>
           ))}
         </div>
-
+ 
         <div className="absolute left-0 right-0 bottom-0 px-6 py-6 md:px-10 md:py-8"
           style={{ background: "linear-gradient(to top, rgba(14,74,67,0.9), rgba(14,74,67,0))" }}>
           <div className="gdm-cinzel text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: C.magenta }}>{slides[i].label}</div>
           <div className="gdm-display text-xl md:text-3xl leading-snug" style={{ color: C.cream }}>{slides[i].cap}</div>
         </div>
-
+ 
         {[["‹", -1, "left-3 md:left-6"], ["›", 1, "right-3 md:right-6"]].map(([g, d, pos]) => (
           <button key={pos} onClick={() => go(d)} aria-label={d < 0 ? "Precedente" : "Successiva"}
             className={`absolute ${pos} top-1/2 -translate-y-1/2 w-11 h-11 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110`}
@@ -386,7 +386,7 @@ function ArchiveCarousel({ slides }) {
           </button>
         ))}
       </div>
-
+ 
       <div className="flex items-center justify-center gap-2 mt-6">
         {slides.map((_, k) => (
           <button key={k} onClick={() => setI(k)} aria-label={`Foto ${k + 1}`}
@@ -397,21 +397,21 @@ function ArchiveCarousel({ slides }) {
     </div>
   );
 }
-
+ 
 /* ---------- firma ---------- */
 function Signature() {
   const [err, setErr] = useState(false);
   if (!err) return <img src={ASSETS.signature} onError={() => setErr(true)} alt="Giuseppe di Pasquale" className="h-16 w-auto" />;
   return <div className="gdm-script text-4xl" style={{ color: C.green }}>Giuseppe di Pasquale</div>;
 }
-
+ 
 /* ============================================================
    APP
    ============================================================ */
 export default function App() {
   const [menu, setMenu] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
-
+ 
   /* header: si nasconde scorrendo giù, riappare scorrendo su */
   useEffect(() => {
     let last = window.scrollY;
@@ -434,14 +434,14 @@ export default function App() {
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
-
+ 
   useEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href =
       "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Cinzel:wght@400;500;600;700;800;900&family=Dancing+Script:wght@600;700&display=swap";
     document.head.appendChild(link);
-
+ 
     const style = document.createElement("style");
     style.textContent = `
       .gdm-display{font-family:'Montserrat',system-ui,sans-serif;font-weight:900;}
@@ -462,25 +462,25 @@ export default function App() {
       .gdm-link:hover::after{width:100%;}
     `;
     document.head.appendChild(style);
-
+ 
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(style);
     };
   }, []);
-
+ 
   const NAV = [
     ["La Storia", "#storia"],
     ["L'Antica Ricetta", "#ricetta"],
     ["Contatti", "#contatti"],
   ];
-
+ 
   const SLIDES = [
     { src: ASSETS.storia1, alt: "Il lavoro nei campi", cap: "Il ristoro dopo il lavoro nei campi", label: "Archivio di famiglia" },
     { src: ASSETS.storia2, alt: "Festa di paese", cap: "La bibita delle feste di paese", label: "Bovino" },
     { src: ASSETS.storia3, alt: "La famiglia attorno al tavolo", cap: "Le bottiglie al centro, la famiglia intorno", label: "Archivio di famiglia" },
   ];
-
+ 
   return (
     <div className="gdm-body min-h-screen w-full overflow-x-hidden" style={{ background: C.cream, color: C.ink, fontFamily: "Montserrat, system-ui, sans-serif", fontWeight: 500 }}>
       {/* ===================== NAV ===================== */}
@@ -516,7 +516,7 @@ export default function App() {
           </div>
         )}
       </nav>
-
+ 
       {/* ===================== HERO ===================== */}
       <header id="top" className="relative min-h-screen flex items-center overflow-hidden" style={{ background: C.cream }}>
         <BrandTexture />
@@ -524,7 +524,7 @@ export default function App() {
           <div className="flex justify-center md:justify-start">
             <Reveal delay={80}><WordmarkImg /></Reveal>
           </div>
-
+ 
           <div className="relative flex items-center justify-center">
             <div className="relative" style={{ width: "min(82vw, 360px)", height: "min(96vw, 540px)" }}>
               <div className="absolute left-1/2 top-1/2 rounded-full" style={{ width: "76%", aspectRatio: "1 / 1", height: "auto", transform: "translate(-50%,-32%)", background: C.magenta }} />
@@ -537,10 +537,10 @@ export default function App() {
             </div>
           </div>
         </div>
-
+ 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2" />
       </header>
-
+ 
       {/* ===================== STORIA ===================== */}
       <section id="storia" className="relative scroll-mt-20 py-24 md:py-32 overflow-hidden" style={{ background: C.cream }}>
         <div className="gdm-display pointer-events-none select-none absolute top-6 md:top-8 right-0 md:right-4"
@@ -557,11 +557,11 @@ export default function App() {
               Giuseppe di Pasquale e il nipote omonimo cominciarono a produrre gassosa. Acqua, zucchero, succo di limone: da lì nacque il mestiere di famiglia.
             </p>
           </Reveal>
-
+ 
           <Reveal delay={100} className="mt-14">
             <ArchiveCarousel slides={SLIDES} />
           </Reveal>
-
+ 
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 mt-20">
             <Reveal>
               <div className="gdm-cinzel text-[11px] tracking-[0.28em] uppercase mb-3" style={{ color: C.magenta }}>Fino agli anni Sessanta</div>
@@ -576,14 +576,14 @@ export default function App() {
               </p>
             </Reveal>
           </div>
-
+ 
           <Reveal delay={140} className="mt-14 md:mt-16 max-w-2xl mx-auto text-center">
             <p className="gdm-display leading-snug" style={{ fontSize: "clamp(1.15rem,2.6vw,1.6rem)", fontWeight: 900 }}>
               <span style={{ color: C.magenta }}>E il monaco?</span>{" "}
               <span style={{ color: C.green }}>L'abito che non è stato mai indossato.</span>
             </p>
           </Reveal>
-
+ 
           <Reveal className="mt-16 flex flex-col items-center text-center" delay={160}>
             <Signature />
             <div className="gdm-cinzel text-[12px] tracking-[0.24em] uppercase mt-4" style={{ color: C.green }}>
@@ -592,7 +592,7 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
+ 
       {/* ===================== QUOTE BAND ===================== */}
       <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: C.green }}>
         <BrandTexture bg={C.green} line="rgba(255,255,255,0.10)" />
@@ -607,7 +607,7 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
+ 
       {/* ===================== FOTO ===================== */}
       <section className="relative overflow-hidden" style={{ background: C.cream }}>
         <img
@@ -618,7 +618,7 @@ export default function App() {
           style={{ display: "block" }}
         />
       </section>
-
+ 
       {/* ===================== ANTICA RICETTA ===================== */}
       <section id="ricetta" className="relative scroll-mt-20 py-24 md:py-32 overflow-hidden" style={{ background: C.cream }}>
         <div className="relative max-w-4xl mx-auto px-6 text-center">
@@ -629,7 +629,7 @@ export default function App() {
               <span style={{ color: C.magenta }}>Nient'altro.</span>
             </h2>
           </Reveal>
-
+ 
           {/* ingredienti attorno al sigillo — composizione a raggiera */}
           <Reveal delay={120} className="mt-14 md:mt-24">
             <div className="relative mx-auto" style={{ width: "min(92vw, 620px)", aspectRatio: "1 / 1" }}>
@@ -650,11 +650,11 @@ export default function App() {
                   return <circle key={i} cx={330 + 196 * Math.cos(a)} cy={330 + 196 * Math.sin(a)} r="3" fill={C.magenta} />;
                 })}
               </svg>
-
+ 
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: "31%" }}>
                 <SealLogo size="100%" />
               </div>
-
+ 
               {["Acqua", "Zucchero", "Succo di limone"]
                 .map((it, i, arr) => {
                   const deg = -90 + (360 / arr.length) * i;
@@ -680,7 +680,7 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
+ 
       {/* ===================== CONTATTI ===================== */}
       <section id="contatti" className="relative scroll-mt-20 py-24 md:py-32 overflow-hidden" style={{ background: C.green }}>
         <BrandTexture bg={C.green} line="rgba(255,255,255,0.10)" />
@@ -708,7 +708,7 @@ export default function App() {
           </Reveal>
         </div>
       </section>
-
+ 
       {/* ===================== FOOTER ===================== */}
       <footer className="py-12" style={{ background: C.greenD }}>
         <div className="max-w-6xl mx-auto px-6">
@@ -718,7 +718,7 @@ export default function App() {
               Bibita analcolica gassata
             </div>
           </div>
-
+ 
           <div className="mt-8 pt-8 text-center space-y-2" style={{ borderTop: "1px solid rgba(242,230,210,0.12)" }}>
             <p className="text-sm" style={{ color: "rgba(242,230,210,0.6)" }}>
               Ricetta originale ideata da Giuseppe di Pasquale — Bovino (FG), 1912
@@ -732,3 +732,4 @@ export default function App() {
     </div>
   );
 }
+ 
