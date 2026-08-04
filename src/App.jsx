@@ -9,6 +9,7 @@ const ASSETS = {
   seal:      "https://i.postimg.cc/RVR7hyGs/tappo-off.png",
   signature: "./assets/firma-giuseppe-dipasquale.png",
   logoWhite: "./assets/logo-bianco.png",
+  lifestyle: "./assets/gassosa-lifestyle.jpg",
   storia1:   "https://i.postimg.cc/dV292Dq6/storia-campi.jpg",
   storia2:   "https://i.postimg.cc/2yLQVSc7/storia-piazza.jpg",
   storia3:   "https://i.postimg.cc/YqgPPrrC/storia-famiglia.jpg",
@@ -605,6 +606,17 @@ export default function App() {
             </p>
           </Reveal>
         </div>
+      </section>
+
+      {/* ===================== FOTO ===================== */}
+      <section className="relative overflow-hidden" style={{ background: C.cream }}>
+        <img
+          src={ASSETS.lifestyle}
+          alt="Gassosa del Monaco servita con limoni e menta"
+          loading="lazy"
+          className="w-full object-cover"
+          style={{ height: "clamp(360px, 72vh, 760px)", objectPosition: "center 42%", display: "block" }}
+        />
       </section>
 
       {/* ===================== ANTICA RICETTA ===================== */}
