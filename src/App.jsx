@@ -584,12 +584,37 @@ export default function App() {
             </p>
           </Reveal>
 
+        </div>
+      </section>
+
+      {/* ===================== IL MONACO ===================== */}
+      <section id="monaco" className="relative scroll-mt-20 pb-24 md:pb-32 overflow-hidden" style={{ background: C.cream }}>
+        <div className="relative max-w-2xl mx-auto px-6">
+
+          <Reveal>
+            <p className="text-lg leading-relaxed" style={{ color: "#3a4a45" }}>
+              Giuseppe di Pasquale aveva deciso di diventare monaco e si era recato presso il monastero di Montevergine. Durante il periodo di prova venne assegnato alla cucina e, secondo il racconto tramandato in famiglia, fu sottoposto per diversi giorni a una particolare prova di pazienza. I frati gli chiedevano ripetutamente cosa avrebbe preparato da mangiare: la risposta doveva essere sempre la stessa, se fossero arrivati gli ingredienti avrebbe preparato pasta e fagioli. La domanda però veniva ripetuta, giorno dopo giorno, fino a quando la pazienza del giovane venne meno e arrivò una risposta decisamente poco adatta alla vita monastica. Fu così che il futuro monaco lasciò il monastero e tornò a Bovino. Da qui nasce il soprannome che sarebbe rimasto legato alla storia della famiglia: il Monaco.
+            </p>
+          </Reveal>
+
+          <Reveal delay={100} className="mt-14">
+            <div className="gdm-cinzel text-[11px] tracking-[0.28em] uppercase mb-3" style={{ color: C.magenta }}>Dal ghiaccio alla gassosa</div>
+            <p className="text-lg leading-relaxed" style={{ color: "#3a4a45" }}>
+              Parallelamente alla vicenda del giovane aspirante monaco, a Bovino il nipote Giuseppe di Pasquale aveva già avviato un'attività legata al commercio del ghiaccio: lo acquistava a Manfredonia e lo conservava nelle neviere per poterlo vendere durante l'estate. L'attività era legata anche all'osteria di famiglia, dove venivano venduti vino e altri prodotti.
+            </p>
+            <p className="text-lg leading-relaxed mt-5" style={{ color: "#3a4a45" }}>
+              Quando il “mancato monaco” tornò a Bovino, fu proprio nell'ambiente dell'osteria che prese forma una nuova idea: secondo la tradizione tramandata dalla famiglia, fu lui a insegnare al nipote a produrre la gassosa. Era il 1912. Da quell'idea nasce il nome di oggi: Gassosa del Monaco.
+            </p>
+          </Reveal>
+
+
           <Reveal className="mt-16 flex flex-col items-center text-center" delay={160}>
             <Signature />
             <div className="gdm-cinzel text-[12px] tracking-[0.24em] uppercase mt-4" style={{ color: C.green }}>
               Giuseppe di Pasquale — Bovino (FG)
             </div>
           </Reveal>
+
         </div>
       </section>
 
