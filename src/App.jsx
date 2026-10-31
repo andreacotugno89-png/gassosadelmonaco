@@ -505,14 +505,16 @@ export default function App() {
         {/* ===================== PRIMA SCHERMATA ===================== */}
         <header id="top" className="hero" data-theme="hero">
           <div className="hero__stage">
+            {/* il cerchio verde, dietro la scritta */}
+            <div className="hero__cerchio" aria-hidden="true" />
             <h1 className="hero__word">
               <span className="sr-only">Gassosa del Monaco</span>
               <span className="l1"><LabelGassosa /></span>
               <span className="hero__del"><LabelDel /></span>
               <span className="l2"><LabelMonaco /></span>
             </h1>
-            {/* il cerchio verde: dentro, la stessa scritta con MONACO rosa */}
-            <div className="hero__cerchio" aria-hidden="true">
+            {/* sopra la scritta, solo MONACO rosa, ritagliato dallo stesso cerchio */}
+            <div className="hero__rosa" aria-hidden="true">
               <div className="hero__word">
                 <span className="l1"><LabelGassosa /></span>
                 <span className="hero__del"><LabelDel /></span>

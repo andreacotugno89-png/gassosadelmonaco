@@ -133,18 +133,22 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
   position: relative; height: 100svh; display: grid; grid-template-rows: 1fr;
   padding-top: var(--nav-h); overflow: hidden; background: var(--magenta);
 }
-/* il cerchio verde parte dalla bottiglia e copre tutto; la scritta dentro è la stessa,
-   allineata al millimetro, con MONACO rosa: così MONACO cambia colore dove il cerchio passa */
-.hero__cerchio {
-  /* sale anche sotto il menu, così alla fine tutta la schermata è verde */
+/* il cerchio verde parte dalla bottiglia e copre tutto, sotto la scritta: è un colore pieno, che il
+   telefono disegna subito. Sopra la scritta c'è una seconda MONACO, rosa, ritagliata dallo stesso
+   cerchio: MONACO cambia colore esattamente dove il cerchio passa, e la scritta non sparisce mai. */
+.hero__cerchio, .hero__rosa {
+  /* salgono anche sotto il menu, così alla fine tutta la schermata è verde */
   --cy: 50%;
-  position: absolute; inset: calc(-1 * var(--nav-h)) 0 0; z-index: 1; background: var(--green); pointer-events: none;
-  will-change: clip-path; contain: strict;
+  position: absolute; inset: calc(-1 * var(--nav-h)) 0 0; pointer-events: none;
   clip-path: circle(calc(var(--p, 0) * 150%) at 50% calc(var(--cy) + var(--nav-h) / 2));
 }
-.hero__cerchio > .hero__word { top: var(--nav-h); }
-@media (max-width: 767px) { .hero__cerchio { --cy: 64%; } }   /* sul telefono parte dalla bottiglia, più in basso */
-.hero__cerchio .hero__word .l2 { color: var(--pink); }
+.hero__cerchio { z-index: 0; background: var(--green); will-change: clip-path; }
+.hero__stage > .hero__word { z-index: 1; }
+.hero__rosa { z-index: 1; }
+.hero__rosa > .hero__word { top: var(--nav-h); }
+.hero__rosa .l1, .hero__rosa .hero__del { visibility: hidden; }
+.hero__rosa .hero__word .l2 { color: var(--pink); }
+@media (max-width: 767px) { .hero__cerchio, .hero__rosa { --cy: 64%; } }   /* sul telefono parte dalla bottiglia, più in basso */
 @media (min-width: 768px) { .hero__bottle > * { transform: scale(calc(1 + var(--p, 0) * 0.14)); } }
 /* durante il passaggio la pagina non scorre, nemmeno sui telefoni */
 html.passaggio, html.passaggio body { overflow: hidden; overscroll-behavior: none; touch-action: none; }
