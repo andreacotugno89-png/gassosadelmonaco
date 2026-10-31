@@ -100,7 +100,7 @@ Le quattro proposte di colore (magenta, verde, rosa `#f6cfd9`, menta `#cde8dc`) 
 ## Componenti
 
 - **Ordini**: tutti i pulsanti d'ordine aprono un'email già scritta a dipasquale1912@gmail.com (oggetto e traccia diversi per locali e privati).
-- **Pulsanti**: a pillola. Verde sul magenta, magenta sulla carta. Al passaggio del mouse salgono di 2px con un'ombra morbida.
+- **Pulsanti**: a pillola. Nella prima schermata il pulsante "Ordina" del menu è color carta con testo verde, leggibile sul magenta e sul verde. Verde sul magenta, magenta sulla carta. Al passaggio del mouse salgono di 2px con un'ombra morbida.
 - **Pastiglie**: gli ingredienti in pillole bordate.
 - **Nastro**: banda carta con scritte verdi che scorre con la frase del retro dell'etichetta, "Una ricetta semplice · custodita dal tempo · ritrovata nel gusto", separata dal fiore magenta del tappo.
 - **Stampe**: le foto d'archivio su carta bianca con angoli morbidi, un po' storte; si raddrizzano al passaggio del mouse.
@@ -110,7 +110,7 @@ Le quattro proposte di colore (magenta, verde, rosa `#f6cfd9`, menta `#cde8dc`) 
 
 ## Movimento
 
-La bottiglia galleggia piano e ondeggia di ±14° anche da ferma; con il passaggio fa un giro intero, sfumando tra i 36 fotogrammi così il giro è continuo; si può anche far girare trascinandola (36 fotogrammi WebP in `public/assets/giro/`, renderizzati in Cycles dal file Blender); le due righe del titolo si svelano dal basso; le bollicine, disegnate come sull'etichetta (sfere trasparenti con il bordo verde acqua più pieno in basso e un riflesso bianco in alto a destra; una trentina, di misure diverse), salgono veloci ondeggiando; gli ingredienti entrano uno dopo l'altro quando la lista compare. Con "riduci movimento" attivo tutto resta fermo.
+La bottiglia galleggia piano e ondeggia di ±14° anche da ferma; con il passaggio fa un giro intero, La bottiglia galleggia e si inclina piano anche da ferma; con il passaggio fa un giro intero, sempre un fotogramma intero e nitido (72 fotogrammi, uno ogni 5°, renderizzati in Cycles dal file Blender, in `public/assets/giro/d` per il computer e `public/assets/giro/m`, alti 820 px e più compressi, per il telefono: circa 2,4 MB). I fotogrammi arrivano a tappe: prima uno ogni 40°, così il giro funziona dopo circa 300 KB, poi gli altri; si può anche far girare trascinandola; le due righe del titolo si svelano dal basso; le bollicine, disegnate come sull'etichetta (sfere trasparenti con il bordo verde acqua più pieno in basso e un riflesso bianco in alto a destra; una trentina, di misure diverse), salgono veloci ondeggiando; gli ingredienti entrano uno dopo l'altro quando la lista compare. Con "riduci movimento" attivo tutto resta fermo.
 
 ## Da non fare
 

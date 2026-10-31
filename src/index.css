@@ -339,6 +339,7 @@ html.passaggio, html.passaggio body { overflow: hidden; overscroll-behavior: non
 
 /* ---------- Mobile ---------- */
 @media (max-width: 767px) {
+  .bubble:nth-of-type(2n) { display: none; }   /* sul telefono metà bollicine: l'animazione resta leggera */
   .hero__word { --w: 92vw; justify-content: flex-start; padding-top: 5svh; }
   .hero__stage { align-items: end; padding-bottom: 5svh; }
   .hero__bottle { height: min(54svh, 140vw); }
@@ -347,3 +348,5 @@ html.passaggio, html.passaggio body { overflow: hidden; overscroll-behavior: non
 
 .logo-paper { filter: brightness(0) invert(1); }
 html[data-theme="hero"] .nav { background: transparent; }
+/* nella prima schermata il pulsante del menu è color carta: si legge sul magenta e sul verde, anche a metà passaggio */
+html[data-theme="hero"] .nav .btn--theme { background: var(--paper); color: var(--green); }

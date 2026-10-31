@@ -86,9 +86,14 @@ function LabelMonaco() {
 }
 
 /* ---------- la bottiglia in 3D: un giro completo renderizzato dal file Blender ---------- */
-/* 36 fotogrammi, uno ogni 10°. All'apertura la bottiglia è ferma, di fronte. */
-const GIRO_N = 36;
-const GIRO = Array.from({ length: GIRO_N }, (_, i) => `/assets/giro/giro-${String(i).padStart(3, "0")}.webp`);
+/* 72 fotogrammi, uno ogni 5°, in due serie: "d" per il computer, "m" più piccola per il telefono.
+   All'apertura la bottiglia è ferma, di fronte. */
+const GIRO_N = 72;
+const giroSrc = (serie, i) => `/assets/giro/${serie}/giro-${String(i).padStart(3, "0")}.webp`;
+/* l'ordine di caricamento: prima un fotogramma ogni 8, poi ogni 4, ogni 2, infine tutti;
+   così il giro funziona presto e si fa via via più pieno */
+const ORDINE = [8, 4, 2, 1].flatMap((passo, t, a) =>
+  Array.from({ length: GIRO_N / passo }, (_, k) => k * passo).filter((i) => t === 0 || i % a[t - 1] !== 0));
 
 /* ---------- il passaggio dal magenta al verde ----------
    Un solo gesto di scroll (rotella, dito o tasto) dalla cima della pagina fa partire
@@ -184,32 +189,48 @@ function usePassaggio() {
 
 function BottleSpin() {
   const canvas = useRef(null);
+  const [serie] = useState(() => (window.matchMedia("(max-width: 767px)").matches ? "m" : "d"));
   const [ready, setReady] = useState(false);
+  const frames = useRef([]);                       // i fotogrammi già pronti, per indice
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
     let alive = true;
-    const imgs = GIRO.map((src) => { const im = new Image(); im.decoding = "async"; im.src = src; return im; });
-    /* gira solo se ci sono tutti i fotogrammi; altrimenti resta la bottiglia ferma */
-    Promise.all(imgs.map((im) => im.decode())).then(() => { if (alive) setReady(imgs); }, () => {});
+    (async () => {
+      /* uno alla volta, nell'ordine scelto: il primo giro grezzo arriva con 9 fotogrammi */
+      for (const i of ORDINE) {
+        const im = new Image();
+        im.decoding = "async";
+        im.src = giroSrc(serie, i);
+        try { await im.decode(); } catch { continue; }
+        if (!alive) return;
+        frames.current[i] = im;
+        if (i === ORDINE[8]) setReady(true);
+      }
+    })();
     return () => { alive = false; };
-  }, []);
+  }, [serie]);
 
   useEffect(() => {
     if (!ready) return;
-    const imgs = ready, c = canvas.current, ctx = c.getContext("2d");
-    c.width = imgs[0].naturalWidth; c.height = imgs[0].naturalHeight;
+    const c = canvas.current, ctx = c.getContext("2d");
+    const first = frames.current[0];
+    c.width = first.naturalWidth; c.height = first.naturalHeight;
     let target = 0, last = -1, drag = null, spin = 0, raf;   // target: i gradi aggiunti trascinando
 
-    /* sempre un fotogramma intero e nitido: niente sovrapposizioni */
+    /* sempre un fotogramma intero e nitido: il più vicino tra quelli già arrivati */
     const draw = (deg) => {
-      const n = imgs.length;
-      const k = ((Math.round(deg / (360 / n)) % n) + n) % n;
-      if (k === last) return;
+      const f = (((deg / (360 / GIRO_N)) % GIRO_N) + GIRO_N) % GIRO_N;
+      let k = Math.round(f) % GIRO_N;
+      for (const passo of [1, 2, 4, 8]) {
+        const q = (Math.round(f / passo) * passo) % GIRO_N;
+        if (frames.current[q]) { k = q; break; }
+      }
+      if (k === last || !frames.current[k]) return;
       last = k;
       ctx.clearRect(0, 0, c.width, c.height);
-      ctx.drawImage(imgs[k], 0, 0);
+      ctx.drawImage(frames.current[k], 0, 0);
     };
     const tick = () => {
       if (!drag) spin *= 0.94;                       // inerzia dopo il trascinamento
@@ -238,7 +259,7 @@ function BottleSpin() {
 
   return (
     <div className="hero__bottle">
-      <img src={GIRO[0]} alt="Bottiglia di Gassosa del Monaco" fetchPriority="high" className={ready ? "is-hidden" : ""} />
+      <img src={giroSrc(serie, 0)} alt="Bottiglia di Gassosa del Monaco" fetchPriority="high" className={ready ? "is-hidden" : ""} />
       {ready && <canvas ref={canvas} aria-hidden="true" title="Trascina per girare la bottiglia" />}
     </div>
   );
