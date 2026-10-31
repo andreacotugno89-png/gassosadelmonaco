@@ -139,12 +139,15 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
   /* sale anche sotto il menu, così alla fine tutta la schermata è verde */
   --cy: 50%;
   position: absolute; inset: calc(-1 * var(--nav-h)) 0 0; z-index: 1; background: var(--green); pointer-events: none;
+  will-change: clip-path; contain: strict;
   clip-path: circle(calc(var(--p, 0) * 150%) at 50% calc(var(--cy) + var(--nav-h) / 2));
 }
 .hero__cerchio > .hero__word { top: var(--nav-h); }
 @media (max-width: 767px) { .hero__cerchio { --cy: 64%; } }   /* sul telefono parte dalla bottiglia, più in basso */
 .hero__cerchio .hero__word .l2 { color: var(--pink); }
 @media (min-width: 768px) { .hero__bottle > * { transform: scale(calc(1 + var(--p, 0) * 0.14)); } }
+/* durante il passaggio la pagina non scorre, nemmeno sui telefoni */
+html.passaggio, html.passaggio body { overflow: hidden; overscroll-behavior: none; touch-action: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero { height: auto; min-height: 100svh; }
 }
@@ -168,7 +171,7 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .hero__del .label-line { width: auto; height: 1em; }
 .hero__del::before, .hero__del::after { content: ""; width: 0.9em; height: 0.08em; background: currentColor; border-radius: 1em; }
 .hero__bottle {
-  position: relative; z-index: 2; height: min(70svh, 700px); aspect-ratio: var(--giro-ratio, 0.3001);
+  position: relative; z-index: 2; height: min(70svh, 700px); aspect-ratio: var(--giro-ratio, 0.3001); will-change: transform;
   filter: drop-shadow(0 40px 36px rgba(70, 0, 25, 0.45));
   transform: rotate(-6deg);
 }
@@ -188,12 +191,16 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .hero__bottle { animation: bottle-float 5.5s ease-in-out infinite; }
   .hero__word .l1 { animation: word-in 1s var(--ease-out) 0.05s both; }
   .hero__word .l2 { animation: word-in 1s var(--ease-out) 0.15s both; }
   .bubble { animation: bubble-rise var(--d, 9s) linear var(--delay, 0s) infinite; }
 }
 @keyframes bottle-in { from { transform: translateY(60px) rotate(-14deg); } to { transform: rotate(-6deg); } }
-@keyframes bottle-float { 0%, 100% { transform: rotate(-6deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-12px); } }
+@keyframes bottle-float {
+  0%, 100% { transform: rotate(-7deg) translateY(0); }
+  50% { transform: rotate(-3deg) translateY(-18px); }
+}
 @keyframes word-in { from { transform: translateY(30px); clip-path: inset(100% -5% -60% -5%); } to { transform: none; clip-path: inset(-60% -5% -60% -5%); } }
 @keyframes bubble-rise {
   0% { transform: translate(0, 0) scale(0.6); opacity: 0; }

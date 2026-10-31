@@ -95,53 +95,65 @@ const GIRO = Array.from({ length: GIRO_N }, (_, i) => `/assets/giro/giro-${Strin
    l'animazione, che va avanti da sola: il cerchio verde si allarga, la bottiglia fa un giro
    intero, MONACO diventa rosa man mano che il cerchio la copre. Finché dura, la pagina
    non scorre. Tornando in cima, un gesto verso l'alto la riavvolge. */
-const PASSAGGIO_MS = 1900;
+const PASSAGGIO_MS = 2000;
+const PAUSA_MS = 450;                              // dopo l'animazione, il tempo in cui la rotella è ancora ignorata
 let heroP = 0;                                     // 0 = magenta, 1 = verde; lo legge anche la bottiglia
 function setHeroP(p) {
   heroP = p;
-  const root = document.documentElement;
-  root.style.setProperty("--p", p.toFixed(4));
-  root.dataset.fase = p > 0.5 ? "verde" : "magenta";
+  /* la variabile vive sulla prima schermata: cambiarla sulla radice farebbe ricalcolare tutta la pagina */
+  document.getElementById("top")?.style.setProperty("--p", p.toFixed(4));
+  /* il menu e i colori del tema passano al verde solo verso la fine, una volta sola */
+  const fase = p > 0.9 ? "verde" : "magenta";
+  if (document.documentElement.dataset.fase !== fase) document.documentElement.dataset.fase = fase;
 }
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
 function usePassaggio() {
   useEffect(() => {
+    const root = document.documentElement;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let fase = window.scrollY > 4 ? 1 : 0, corre = false, raf = 0, touchY = null;
+    let fase = window.scrollY > 4 ? 1 : 0, corre = false, finoA = 0, raf = 0;
+    let touchY = null, touchBloccato = false;      // un gesto col dito iniziato durante l'animazione resta bloccato fino a quando si alza il dito
     setHeroP(fase);
     if (reduce) {
       const onScroll = () => setHeroP(window.scrollY > 4 ? 1 : 0);
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
     }
+    const bloccato = () => corre || performance.now() < finoA;
     const parti = (verso) => {
       corre = true;
+      root.classList.add("passaggio");               // ferma lo scroll anche sui telefoni
       const da = heroP, a = verso, t0 = performance.now();
       const passo = (now) => {
         const t = Math.min(1, (now - t0) / PASSAGGIO_MS);
         setHeroP(da + (a - da) * easeInOut(t));
-        if (t < 1) raf = requestAnimationFrame(passo);
-        else { fase = a; corre = false; }
+        if (t < 1) { raf = requestAnimationFrame(passo); return; }
+        fase = a; corre = false; finoA = performance.now() + PAUSA_MS;
+        root.classList.remove("passaggio");
       };
       raf = requestAnimationFrame(passo);
     };
     /* decide se il gesto va trattenuto: true = la pagina non deve scorrere */
     const gesto = (giu) => {
-      if (corre) return true;
+      if (bloccato()) return true;
       if (window.scrollY > 4) return false;
       if (giu && fase === 0) { parti(1); return true; }
       if (!giu && fase === 1) { parti(0); return true; }
       return false;
     };
-    const onWheel = (e) => { if (Math.abs(e.deltaY) > 2 && gesto(e.deltaY > 0)) e.preventDefault(); };
-    const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
+    const onWheel = (e) => {
+      if (bloccato()) { e.preventDefault(); finoA = Math.max(finoA, performance.now() + 120); return; }   // la coda della rotella non fa scorrere
+      if (Math.abs(e.deltaY) > 2 && gesto(e.deltaY > 0)) e.preventDefault();
+    };
+    const onTouchStart = (e) => { touchY = e.touches[0].clientY; touchBloccato = bloccato(); };
     const onTouchMove = (e) => {
+      if (touchBloccato || bloccato()) { e.preventDefault(); return; }
       if (touchY === null) return;
       const dy = touchY - e.touches[0].clientY;
-      if (corre) { e.preventDefault(); return; }
-      if (Math.abs(dy) > 12 && gesto(dy > 0)) { e.preventDefault(); touchY = null; }
+      if (Math.abs(dy) > 10 && gesto(dy > 0)) { e.preventDefault(); touchBloccato = true; }
     };
+    const onTouchEnd = () => { touchY = null; touchBloccato = false; };
     const TASTI = { ArrowDown: true, PageDown: true, " ": true, ArrowUp: false, PageUp: false };
     const onKey = (e) => {
       if (!(e.key in TASTI) || e.target.closest?.("input, textarea, button, a")) return;
@@ -152,13 +164,18 @@ function usePassaggio() {
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
     window.addEventListener("keydown", onKey);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
+      root.classList.remove("passaggio");
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("scroll", onScroll);
     };
@@ -183,19 +200,29 @@ function BottleSpin() {
     if (!ready) return;
     const imgs = ready, c = canvas.current, ctx = c.getContext("2d");
     c.width = imgs[0].naturalWidth; c.height = imgs[0].naturalHeight;
-    let target = 0, last = -1, drag = null, spin = 0, raf;   // target: i gradi aggiunti trascinando
+    let target = 0, last = "", drag = null, spin = 0, raf;   // target: i gradi aggiunti trascinando
+    const t0 = performance.now();
 
+    /* tra un fotogramma e l'altro (10°) le due immagini vicine si sommano in dissolvenza:
+       con "lighter" il risultato è la media esatta, anche sui bordi trasparenti */
     const draw = (deg) => {
-      const i = ((Math.round(deg / (360 / GIRO_N)) % GIRO_N) + GIRO_N) % GIRO_N;
-      if (i === last) return;
-      last = i;
+      const f = ((deg / (360 / GIRO_N)) % GIRO_N + GIRO_N) % GIRO_N;
+      const i = Math.floor(f), k = Math.round((f - i) * 16) / 16, j = (i + 1) % GIRO_N;
+      const key = i + ":" + k;
+      if (key === last) return;
+      last = key;
       ctx.clearRect(0, 0, c.width, c.height);
-      ctx.drawImage(imgs[i], 0, 0);
+      if (k === 0) { ctx.drawImage(imgs[i], 0, 0); return; }
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = 1 - k; ctx.drawImage(imgs[i], 0, 0);
+      ctx.globalAlpha = k; ctx.drawImage(imgs[j], 0, 0);
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
     };
-    const tick = () => {
+    const tick = (now) => {
       if (!drag) spin *= 0.94;                       // inerzia dopo il trascinamento
       target += spin;
-      draw(heroP * 360 + target);                    // il giro intero va di pari passo con il cerchio
+      const dondolo = Math.sin((now - t0) / 1100) * 14;   // da ferma ondeggia di ±14°, come in mano
+      draw(heroP * 360 + target + dondolo);          // il giro intero va di pari passo con il cerchio
       raf = requestAnimationFrame(tick);
     };
     const onMove = (e) => {
