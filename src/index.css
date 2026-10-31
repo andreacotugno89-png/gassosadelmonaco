@@ -1,111 +1,334 @@
+/* Gassosa del Monaco: lo stile Limone, su fondo magenta */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --magenta: #d23566;      /* il sole dell'etichetta: il fondo della pagina */
+  --magenta-d: #b02653;
+  --magenta-ink: #c42a5c;  /* magenta per il testo su crema */
+  --pink: #f08cad;         /* rosa per il testo su verde */
+  --green: #0e4a43;        /* l'inchiostro dell'etichetta */
+  --green-d: #0a3833;
+  --cream: #fbefdd;        /* la carta dell'etichetta */
+  --paper: #fff6ea;        /* il testo sul magenta: 4,9:1 */
+  --paper-soft: rgba(255, 246, 234, 0.9);
+  --rosa: #f6cfd9;         /* gli altri due fondi della pagina */
+  --menta: #cde8dc;
+  --vetrina: #f5e9d9;      /* la carta del volantino "Dal 1912": il fondo delle bottiglie */
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --font-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
+  --font-body: "Figtree", system-ui, sans-serif;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --nav-h: 4.25rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius: 28px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* ---------- I quattro colori ----------
+   Ogni sezione ha il suo fondo: magenta, verde, rosa, menta. La pagina prende il colore
+   della sezione al centro dello schermo e ci sfuma (le variabili sono registrate con
+   @property, quindi la transizione funziona anche sui colori). */
+@property --t-bg      { syntax: "<color>"; inherits: true; initial-value: #d23566; }
+@property --t-ink     { syntax: "<color>"; inherits: true; initial-value: #fff6ea; }
+@property --t-soft    { syntax: "<color>"; inherits: true; initial-value: #fff6ea; }
+@property --t-acc     { syntax: "<color>"; inherits: true; initial-value: #0e4a43; }
+@property --t-btn     { syntax: "<color>"; inherits: true; initial-value: #0e4a43; }
+@property --t-btn-ink { syntax: "<color>"; inherits: true; initial-value: #fff6ea; }
+@property --t-line    { syntax: "<color>"; inherits: true; initial-value: rgba(255, 246, 234, 0.35); }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html, html[data-theme="magenta"], html[data-theme="hero"] {
+  --t-bg: var(--magenta); --t-ink: var(--paper); --t-soft: rgba(255, 246, 234, 0.9);
+  --t-acc: var(--green); --t-btn: var(--green); --t-btn-ink: var(--paper); --t-line: rgba(255, 246, 234, 0.35);
+}
+html[data-theme="verde"], html[data-theme="hero"][data-fase="verde"] {
+  --t-bg: var(--green); --t-ink: var(--cream); --t-soft: rgba(251, 239, 221, 0.88);
+  --t-acc: var(--pink); --t-btn: var(--magenta); --t-btn-ink: #fff; --t-line: rgba(251, 239, 221, 0.25);
+}
+html[data-theme="rosa"], html[data-theme="menta"] {
+  --t-bg: var(--rosa); --t-ink: var(--green); --t-soft: #2a5a53;
+  --t-acc: var(--magenta-ink); --t-btn: var(--magenta-ink); --t-btn-ink: #fff; --t-line: rgba(14, 74, 67, 0.22);
+}
+html[data-theme="menta"] { --t-bg: var(--menta); }
+
+html {
+  scroll-padding-top: calc(var(--nav-h) + 1rem);
+  scrollbar-color: var(--t-btn) var(--t-bg);
+  -webkit-text-size-adjust: 100%;
+  background: var(--t-bg);
+  transition: --t-bg 0.9s var(--ease-out), --t-ink 0.9s var(--ease-out), --t-soft 0.9s var(--ease-out),
+    --t-acc 0.9s var(--ease-out), --t-btn 0.9s var(--ease-out), --t-btn-ink 0.9s var(--ease-out), --t-line 0.9s var(--ease-out);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
 body {
   margin: 0;
+  background: var(--t-bg);
+  color: var(--t-ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  caret-color: var(--t-acc);
+  -webkit-font-smoothing: antialiased;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+::selection { background: var(--green); color: var(--cream); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.5px; }
+:focus-visible { outline: 3px solid var(--t-ink); outline-offset: 3px; border-radius: 6px; }
+.acc { color: var(--t-acc); }
+.soft { color: var(--t-soft); }
+
+.wrap { width: 100%; max-width: 78rem; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3.5rem); }
+.measure { max-width: 60ch; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.88;
+  text-wrap: balance;
   margin: 0;
 }
+.h-xl { font-size: clamp(3.4rem, 9vw, 7.5rem); }
+.h-lg { font-size: clamp(2.8rem, 6.4vw, 5.6rem); }
+.h-md { font-size: clamp(2rem, 3.6vw, 3rem); }
+.lead { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.45; }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* Pulsanti */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  min-height: 3.25rem; padding: 0.8rem 1.6rem; border-radius: 999px;
+  font-family: var(--font-body); font-size: 1.05rem; font-weight: 700;
+  text-decoration: none; white-space: nowrap; border: 2px solid transparent;
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -10px rgba(10, 56, 51, 0.6); }
+.btn:active { transform: translateY(0); box-shadow: none; }
+.btn svg { width: 1.2em; height: 1.2em; flex: none; }
+.btn--theme { background: var(--t-btn); color: var(--t-btn-ink); }
+.btn--theme:hover { filter: brightness(0.92); }
+.btn--magenta { background: var(--magenta-ink); color: #fff; }
+.btn--magenta:hover { background: var(--magenta-d); }
+.btn--sm { min-height: 2.6rem; padding: 0.45rem 1.15rem; font-size: 0.95rem; }
+.btn--lg { min-height: 3.6rem; padding-inline: 2rem; font-size: 1.12rem; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.pills li { border: 2px solid currentColor; border-radius: 999px; padding: 0.3rem 0.9rem; font-weight: 700; font-size: 0.9rem; line-height: 1.3; }
+
+.nav { background: var(--t-bg); color: var(--t-ink); }
+
+.nav-link { position: relative; text-decoration: none; font-weight: 500; padding-block: 0.4rem; }
+.nav-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0.1rem; height: 2px; border-radius: 2px;
+  background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease-out);
+}
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* ---------- Prima schermata ---------- */
+.hero-pin { position: relative; height: 250svh; }
+.hero {
+  position: sticky; top: 0; height: 100svh; display: grid; grid-template-rows: 1fr;
+  padding-top: var(--nav-h); overflow: hidden; background: var(--magenta);
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; background: var(--green); pointer-events: none;
+  clip-path: circle(calc(var(--p, 0) * 150%) at 50% 52%);
+}
+@media (min-width: 768px) { .hero__bottle > * { transform: scale(calc(1 + var(--p, 0) * 0.14)); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-pin { height: auto; }
+  .hero { position: relative; height: auto; min-height: 100svh; }
+  .hero::before { display: none; }
+}
+.hero__stage { position: relative; display: grid; place-items: center; min-height: 0; }
+.hero__word {
+  /* la larghezza di MONACO: le altre righe ne seguono le proporzioni dell'etichetta */
+  --w: min(88vw, 1150px, 112svh);
+  position: absolute; inset: 0; margin: 0; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  user-select: none; pointer-events: none;
+}
+.hero__word > span { display: block; }
+.label-line { display: block; height: auto; overflow: visible; }
+.label-line--gassosa { width: calc(var(--w) * 0.749); }
+.label-line--monaco { width: var(--w); }
+.hero__word .l1 { color: var(--paper); }
+.hero__word .l2 { color: var(--t-acc); }
+.hero__del {
+  display: flex; align-items: center; gap: 0.4em; margin: 0.35em 0 0.3em;
+  font-size: calc(var(--w) * 0.052); color: var(--paper);
+}
+.hero__del .label-line { width: auto; height: 1em; }
+.hero__del::before, .hero__del::after { content: ""; width: 0.9em; height: 0.08em; background: currentColor; border-radius: 1em; }
+.hero__bottle {
+  position: relative; z-index: 2; height: min(70svh, 700px); aspect-ratio: var(--giro-ratio, 0.3001);
+  filter: drop-shadow(0 40px 36px rgba(70, 0, 25, 0.45));
+  transform: rotate(-6deg);
+}
+.hero__bottle img, .hero__bottle canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__bottle canvas { cursor: grab; touch-action: pan-y; }
+.hero__bottle canvas:active { cursor: grabbing; }
+.hero__bottle .is-hidden { visibility: hidden; }
+
+/* le bollicine dell'etichetta: sfere trasparenti (dentro si vede il fondo), bordo verde acqua
+   che si ispessisce in basso, un riflesso bianco in alto a destra */
+.bubble {
+  position: absolute; z-index: 3; border-radius: 50%; pointer-events: none;
+  background:
+    radial-gradient(circle at 68% 26%, rgba(255, 255, 255, 0.95) 0 8%, rgba(255, 255, 255, 0.5) 13%, rgba(255, 255, 255, 0) 20%),
+    radial-gradient(circle at 50% 36%, rgba(200, 244, 240, 0) 50%, rgba(165, 228, 224, 0.45) 72%, rgba(175, 236, 232, 0.95) 92%, rgba(120, 196, 196, 0.95) 100%),
+    rgba(220, 250, 248, 0.08);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+@media (prefers-reduced-motion: no-preference) {
+  .hero__bottle { animation: bottle-in 1.2s var(--ease-out) both, bottle-float 7s ease-in-out 1.2s infinite; }
+  .hero__word .l1 { animation: word-in 1s var(--ease-out) 0.05s both; }
+  .hero__word .l2 { animation: word-in 1s var(--ease-out) 0.15s both; }
+  .bubble { animation: bubble-rise var(--d, 9s) linear var(--delay, 0s) infinite; }
 }
+@keyframes bottle-in { from { transform: translateY(60px) rotate(-14deg); } to { transform: rotate(-6deg); } }
+@keyframes bottle-float { 0%, 100% { transform: rotate(-6deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-12px); } }
+@keyframes word-in { from { transform: translateY(30px); clip-path: inset(100% -5% -60% -5%); } to { transform: none; clip-path: inset(-60% -5% -60% -5%); } }
+@keyframes bubble-rise {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(var(--dx, 0px), -24svh) scale(1); }
+  85% { opacity: 1; }
+  100% { transform: translate(calc(var(--dx, 0px) * -0.4), -50svh) scale(1.1); opacity: 0; }
+}
+
+/* ---------- Nastro ---------- */
+.ribbon { position: relative; z-index: 1; background: var(--cream); color: var(--green); overflow: hidden; padding-block: 1.1rem; }
+.ribbon__track { display: flex; width: max-content; gap: 2.5rem; }
+.ribbon__group { display: flex; align-items: center; gap: 2.5rem; flex: none; }
+.ribbon__item { display: flex; align-items: center; gap: 2.5rem; font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1; white-space: nowrap; }
+.ribbon__item svg { width: 0.9em; height: 0.9em; color: var(--magenta); }
+@media (prefers-reduced-motion: no-preference) {
+  .ribbon__track { animation: ribbon 38s linear infinite; }
+}
+@keyframes ribbon { to { transform: translateX(calc(-50% - 1.25rem)); } }
+
+/* ---------- Storia ---------- */
+/* La foto come una stampa: bordo carta, angoli morbidi, un po' storta */
+.print { margin: 0; }
+.print__frame {
+  background: #fff; padding: 0.7rem; border-radius: 18px; transform: rotate(var(--tilt, -2deg));
+  box-shadow: 0 26px 40px -24px rgba(14, 74, 67, 0.55), 0 4px 10px -4px rgba(14, 74, 67, 0.2);
+  transition: transform 0.6s var(--ease-out);
+}
+.print:hover .print__frame { transform: rotate(0deg) scale(1.01); }
+.print__frame img { display: block; width: 100%; height: auto; border-radius: 11px; filter: sepia(0.15) contrast(1.03); }
+.print figcaption { margin-top: 1.1rem; font-weight: 500; font-size: 0.98rem; color: var(--t-soft); }
+.print figcaption b { color: var(--t-ink); font-weight: 700; }
+
+/* ---------- La linea del tempo ----------
+   Una linea al centro che si riempie scorrendo; a turno, a destra e a sinistra,
+   una foto d'archivio e una bottiglia di famiglia nella sua nicchia. */
+.timeline { position: relative; list-style: none; margin: clamp(3.5rem, 7vw, 6rem) 0 0; padding: 0; --x: 50%; }
+.timeline::before, .timeline__fill {
+  content: ""; position: absolute; top: 0; bottom: 0; left: var(--x); width: 3px; margin-left: -1.5px; border-radius: 3px;
+}
+.timeline::before { background: var(--t-line); }
+.timeline__fill { background: var(--t-acc); transform-origin: top; transform: scaleY(var(--tl, 0)); }
+.tappa {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center;
+  column-gap: clamp(4rem, 9vw, 8rem); padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+.tappa::after {
+  content: ""; position: absolute; left: var(--x); top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
+  background: var(--t-bg); border: 3px solid var(--t-acc); transition: background-color 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.tappa.is-in::after { background: var(--t-acc); transform: scale(1.1); }
+.tappa--flip .tappa__media { order: 2; }
+.tappa__media { display: flex; justify-content: center; }
+.tappa__media .print { width: 100%; max-width: 34rem; }
+.tappa__testo p.soft { margin: 1rem 0 0; font-size: 1.12rem; }
+.tappa__quando { margin: 0; color: var(--t-acc); font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+.tappa__quando.is-anno { font-size: clamp(3.4rem, 7vw, 6rem); line-height: 0.85; letter-spacing: -0.02em; }
+.tappa__quando.is-oggi { color: var(--t-acc); }
+
+/* la bottiglia scontornata, in piedi sul fondo della sezione, con la sua ombra */
+.nicchia { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.nicchia__fondo { position: relative; display: flex; align-items: flex-end; justify-content: center; height: clamp(20rem, 36vw, 30rem); }
+.nicchia__fondo::after {
+  content: ""; position: absolute; left: 50%; bottom: -0.6rem; width: 70%; height: 1.4rem; transform: translateX(-50%);
+  border-radius: 50%; background: radial-gradient(closest-side, rgba(14, 74, 67, 0.32), rgba(14, 74, 67, 0));
+}
+.nicchia__fondo img { position: relative; z-index: 1; height: 100%; width: auto; max-width: none; transition: transform 0.6s var(--ease-out); }
+.nicchia:hover img { transform: translateY(-8px) rotate(-2deg); }
+.nicchia figcaption { margin-top: 1.6rem; max-width: 17rem; text-align: center; font-weight: 500; font-size: 0.98rem; color: var(--t-soft); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .tappa__media, .js .tappa__testo { transition: transform 1s var(--ease-out), clip-path 1s var(--ease-out); }
+  .js .tappa__testo { transition-delay: 0.12s; }
+  .js .tappa:not(.is-in) .tappa__media { transform: translateX(-3rem); clip-path: inset(0 0 0 100%); }
+  .js .tappa--flip:not(.is-in) .tappa__media { transform: translateX(3rem); clip-path: inset(0 100% 0 0); }
+  .js .tappa:not(.is-in) .tappa__testo { transform: translateY(2rem); clip-path: inset(0 0 100% 0); }
+}
+@media (max-width: 859px) {
+  .timeline { --x: 0.75rem; }
+  .tappa { grid-template-columns: minmax(0, 1fr); row-gap: 2rem; padding-left: 2.75rem; }
+  .tappa::after { top: 3.5rem; }
+  .tappa--flip .tappa__media { order: 0; }
+  .tappa__media { justify-content: flex-start; }
+}
+
+/* ---------- Il nome ---------- *//* ---------- Il nome ---------- */
+.name-q { font-size: clamp(3.6rem, 11vw, 10rem); line-height: 0.82; }
+.monaco-racconto { max-width: 40rem; font-size: clamp(1.1rem, 1.4vw, 1.25rem); line-height: 1.6; }
+.monaco-racconto p { margin: 0; }
+
+/* ---------- Ricetta ---------- */
+.ingredients { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--t-line); }
+.ingredients li {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: 1.1rem; border-bottom: 2px solid var(--t-line);
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+}
+.ingredients li svg { width: 0.7em; height: 0.7em; color: var(--t-acc); flex: none; }
+.js .ingredients li { transition: transform 0.9s var(--ease-out), clip-path 0.9s var(--ease-out); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .ingredients:not(.is-in) li { transform: translateX(-1.5rem); clip-path: inset(0 100% 0 0); }
+  .js .ingredients li:nth-child(2) { transition-delay: 0.12s; }
+  .js .ingredients li:nth-child(3) { transition-delay: 0.24s; }
+}
+
+.photo { position: relative; }
+.photo img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+.sticker {
+  position: absolute; left: -1.75rem; bottom: -1.75rem; width: clamp(7rem, 12vw, 9.5rem); aspect-ratio: 1;
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.45));
+}
+.sticker img { width: 100%; height: auto; border-radius: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .sticker img { animation: spin 26s linear infinite; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 859px) { .sticker { left: auto; right: 1rem; bottom: -2rem; } }
+
+/* ---------- Ordini ---------- */
+.order-card {
+  background: var(--paper); color: var(--green); border-radius: var(--radius);
+  padding: clamp(1.75rem, 3vw, 2.75rem); display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;
+  box-shadow: 0 30px 50px -34px rgba(70, 0, 25, 0.7);
+}
+.order-card p { margin: 0.75rem 0 0; font-size: 1.08rem; color: #1c544c; }
+.contact-list { display: grid; margin-inline: 0; margin-bottom: 0; border-top: 2px solid var(--t-line); }
+.contact-list__row { display: grid; gap: 0.2rem 1.5rem; padding-block: 1.1rem; border-bottom: 2px solid var(--t-line); }
+.contact-list dt { font-weight: 500; color: var(--t-soft); }
+@media (min-width: 640px) {
+  .contact-list__row { grid-template-columns: 14rem minmax(0, 1fr); align-items: baseline; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+  .hero__word { --w: 92vw; justify-content: flex-start; padding-top: 5svh; }
+  .hero__stage { align-items: end; padding-bottom: 5svh; }
+  .hero__bottle { height: min(54svh, 140vw); }
+  .btn { white-space: normal; text-align: center; }
+}
+
+.logo-paper { filter: brightness(0) invert(1); }
+html[data-theme="hero"] .nav { background: transparent; }
