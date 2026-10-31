@@ -86,18 +86,83 @@ function LabelMonaco() {
 }
 
 /* ---------- la bottiglia in 3D: un giro completo renderizzato dal file Blender ---------- */
-/* 36 fotogrammi, uno ogni 10°. All'arrivo fa un giro e mezzo e si ferma di fronte;
-   poi segue il mouse, fa un giro intero mentre il fondo passa dal magenta al verde
-   e si può far girare trascinandola. */
+/* 36 fotogrammi, uno ogni 10°. All'apertura la bottiglia è ferma, di fronte. */
 const GIRO_N = 36;
 const GIRO = Array.from({ length: GIRO_N }, (_, i) => `/assets/giro/giro-${String(i).padStart(3, "0")}.webp`);
 
-/* quanto della prima schermata (fissata mentre scorri) è stato percorso: da 0 a 1 */
-function heroProgress() {
-  const pin = document.querySelector(".hero-pin");
-  if (!pin) return 0;
-  const r = pin.getBoundingClientRect(), run = r.height - window.innerHeight;
-  return run > 0 ? Math.min(1, Math.max(0, -r.top / run)) : 0;
+/* ---------- il passaggio dal magenta al verde ----------
+   Un solo gesto di scroll (rotella, dito o tasto) dalla cima della pagina fa partire
+   l'animazione, che va avanti da sola: il cerchio verde si allarga, la bottiglia fa un giro
+   intero, MONACO diventa rosa man mano che il cerchio la copre. Finché dura, la pagina
+   non scorre. Tornando in cima, un gesto verso l'alto la riavvolge. */
+const PASSAGGIO_MS = 1900;
+let heroP = 0;                                     // 0 = magenta, 1 = verde; lo legge anche la bottiglia
+function setHeroP(p) {
+  heroP = p;
+  const root = document.documentElement;
+  root.style.setProperty("--p", p.toFixed(4));
+  root.dataset.fase = p > 0.5 ? "verde" : "magenta";
+}
+const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+function usePassaggio() {
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let fase = window.scrollY > 4 ? 1 : 0, corre = false, raf = 0, touchY = null;
+    setHeroP(fase);
+    if (reduce) {
+      const onScroll = () => setHeroP(window.scrollY > 4 ? 1 : 0);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+    const parti = (verso) => {
+      corre = true;
+      const da = heroP, a = verso, t0 = performance.now();
+      const passo = (now) => {
+        const t = Math.min(1, (now - t0) / PASSAGGIO_MS);
+        setHeroP(da + (a - da) * easeInOut(t));
+        if (t < 1) raf = requestAnimationFrame(passo);
+        else { fase = a; corre = false; }
+      };
+      raf = requestAnimationFrame(passo);
+    };
+    /* decide se il gesto va trattenuto: true = la pagina non deve scorrere */
+    const gesto = (giu) => {
+      if (corre) return true;
+      if (window.scrollY > 4) return false;
+      if (giu && fase === 0) { parti(1); return true; }
+      if (!giu && fase === 1) { parti(0); return true; }
+      return false;
+    };
+    const onWheel = (e) => { if (Math.abs(e.deltaY) > 2 && gesto(e.deltaY > 0)) e.preventDefault(); };
+    const onTouchStart = (e) => { touchY = e.touches[0].clientY; };
+    const onTouchMove = (e) => {
+      if (touchY === null) return;
+      const dy = touchY - e.touches[0].clientY;
+      if (corre) { e.preventDefault(); return; }
+      if (Math.abs(dy) > 12 && gesto(dy > 0)) { e.preventDefault(); touchY = null; }
+    };
+    const TASTI = { ArrowDown: true, PageDown: true, " ": true, ArrowUp: false, PageUp: false };
+    const onKey = (e) => {
+      if (!(e.key in TASTI) || e.target.closest?.("input, textarea, button, a")) return;
+      if (gesto(TASTI[e.key])) e.preventDefault();
+    };
+    /* un salto con i link del menu porta comunque al verde */
+    const onScroll = () => { if (!corre && fase === 0 && window.scrollY > 4) { fase = 1; setHeroP(1); } };
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 }
 
 function BottleSpin() {
@@ -118,9 +183,7 @@ function BottleSpin() {
     if (!ready) return;
     const imgs = ready, c = canvas.current, ctx = c.getContext("2d");
     c.width = imgs[0].naturalWidth; c.height = imgs[0].naturalHeight;
-    let angle = -540, target = 0, last = -1;        // in gradi; parte da un giro e mezzo indietro
-    let pointer = 0, drag = null, spin = 0, raf;
-    const t0 = performance.now();
+    let target = 0, last = -1, drag = null, spin = 0, raf;   // target: i gradi aggiunti trascinando
 
     const draw = (deg) => {
       const i = ((Math.round(deg / (360 / GIRO_N)) % GIRO_N) + GIRO_N) % GIRO_N;
@@ -129,22 +192,14 @@ function BottleSpin() {
       ctx.clearRect(0, 0, c.width, c.height);
       ctx.drawImage(imgs[i], 0, 0);
     };
-    const tick = (now) => {
-      const intro = Math.min(1, (now - t0) / 1800);
-      /* il giro intero si chiude al 75% della prima schermata: nell'ultimo tratto la bottiglia
-         resta ferma di fronte, poi la pagina riprende a scorrere */
-      const scroll = Math.min(1, heroProgress() / 0.75) * 360;
+    const tick = () => {
       if (!drag) spin *= 0.94;                       // inerzia dopo il trascinamento
       target += spin;
-      const goal = target + pointer * 40 + scroll;
-      if (intro < 1) angle = -540 * Math.pow(1 - intro, 3) + goal * intro;
-      else angle += (goal - angle) * 0.2;
-      draw(angle);
+      draw(heroP * 360 + target);                    // il giro intero va di pari passo con il cerchio
       raf = requestAnimationFrame(tick);
     };
     const onMove = (e) => {
-      if (drag) { const dx = e.clientX - drag.x; drag.x = e.clientX; target += dx * 0.6; spin = dx * 0.6; return; }
-      if (e.pointerType === "mouse") pointer = (e.clientX / window.innerWidth) * 2 - 1;
+      if (drag) { const dx = e.clientX - drag.x; drag.x = e.clientX; target += dx * 0.6; spin = dx * 0.6; }
     };
     const onDown = (e) => { drag = { x: e.clientX }; spin = 0; c.setPointerCapture(e.pointerId); };
     const onUp = () => { drag = null; };
@@ -329,8 +384,8 @@ function Timeline() {
 }
 
 /* ---------- il colore della pagina segue la sezione al centro dello schermo ---------- */
-/* Ogni sezione dichiara il suo colore (data-theme). Nella prima schermata il fondo
-   sfuma dal magenta al verde con lo scroll (--p), mentre la bottiglia gira. */
+/* Ogni sezione dichiara il suo colore (data-theme). La prima schermata ha il suo passaggio
+   dal magenta al verde (usePassaggio). */
 const TONO = { hero: "dark", magenta: "dark", verde: "dark", rosa: "light", menta: "light" };
 function useTemaScorrendo() {
   useEffect(() => {
@@ -342,19 +397,7 @@ function useTemaScorrendo() {
       { rootMargin: "-50% 0px -50% 0px" }
     );
     document.querySelectorAll("body [data-theme]").forEach((el) => io.observe(el));
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const p = heroProgress();
-        root.style.setProperty("--p", p.toFixed(4));
-        root.dataset.fase = p > 0.3 ? "verde" : "magenta";   // il verde ha coperto MONACO: le scritte passano al rosa
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => { io.disconnect(); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
+    return () => io.disconnect();
   }, []);
 }
 
@@ -365,6 +408,7 @@ export default function App() {
   const [menu, setMenu] = useState(false);
 
   useTemaScorrendo();
+  usePassaggio();
 
   /* le entrate degli ingredienti partono solo se JavaScript gira */
   useEffect(() => { document.documentElement.classList.add("js"); }, []);
@@ -419,8 +463,7 @@ export default function App() {
 
       <main>
         {/* ===================== PRIMA SCHERMATA ===================== */}
-        <div className="hero-pin" data-theme="hero">
-        <header id="top" className="hero">
+        <header id="top" className="hero" data-theme="hero">
           <div className="hero__stage">
             <h1 className="hero__word">
               <span className="sr-only">Gassosa del Monaco</span>
@@ -428,6 +471,14 @@ export default function App() {
               <span className="hero__del"><LabelDel /></span>
               <span className="l2"><LabelMonaco /></span>
             </h1>
+            {/* il cerchio verde: dentro, la stessa scritta con MONACO rosa */}
+            <div className="hero__cerchio" aria-hidden="true">
+              <div className="hero__word">
+                <span className="l1"><LabelGassosa /></span>
+                <span className="hero__del"><LabelDel /></span>
+                <span className="l2"><LabelMonaco /></span>
+              </div>
+            </div>
             <BottleSpin />
             {BUBBLES.map((b, i) => (
               <i key={i} className="bubble" aria-hidden="true"
@@ -435,7 +486,6 @@ export default function App() {
             ))}
           </div>
         </header>
-        </div>
 
         <Ribbon />
 

@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "montserrat",
+        "createdAt": "2026-10-31T11:52:28.269Z",
+        "reason": "user asked for the ribbon to match the label; Montserrat is the label's own lettering (Di Pasquale wordmark)"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "montserrat",
+        "createdAt": "2026-10-31T11:52:28.584Z",
+        "reason": "label typeface used only for the ribbon phrase, per user request"
+      }
+    ]
+  }
+}

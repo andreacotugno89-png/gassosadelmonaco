@@ -85,7 +85,7 @@ Il verde sul magenta ha poco contrasto (2:1): si usa solo per parole giganti com
 
 Le quattro proposte di colore (magenta, verde, rosa `#f6cfd9`, menta `#cde8dc`) convivono: ogni sezione dichiara il suo fondo (`data-theme`) e la pagina sfuma verso il colore della sezione al centro dello schermo, testi e pulsanti compresi (variabili `--t-*` registrate con `@property`).
 
-- **Prima schermata**: resta ferma per due schermate e mezza di scroll. Il verde si allarga a cerchio dalla bottiglia, la scritta resta ferma e MONACO passa da verde a rosa, la bottiglia cresce un poco e fa un giro intero. Niente testo né pulsanti in basso: l'ordine resta nel menu.
+- **Prima schermata**: all'apertura la bottiglia è ferma, di fronte. Un solo gesto di scroll (rotella, dito o tasto) dalla cima fa partire il passaggio, che dura 1,9 secondi e va avanti da solo mentre la pagina resta ferma: il cerchio verde si allarga dalla bottiglia fino a coprire la schermata e il menu, la bottiglia fa un giro intero, e MONACO diventa rosa esattamente dove il cerchio la copre (la scritta è disegnata due volte: sopra il magenta con MONACO verde, dentro il cerchio con MONACO rosa). Poi la pagina scorre normalmente; tornando in cima, un gesto verso l'alto riavvolge il passaggio. Con "riduci movimento" il passaggio è immediato.
 - **Nastro**: carta, sopra il verde.
 - **Storia, linea del tempo**: il titolo su menta, poi ogni tappa ha il suo fondo (menta, rosa, verde, magenta, menta, verde, rosa) e la pagina cambia colore a ogni tappa. **E il monaco?** (con il racconto di Montevergine): magenta. **Ricetta**: verde. **Ordini**: rosa. **Footer**: verde.
 - Il logo nel menu resta sempre bianco, su ogni fondo (scelta della famiglia). Sui fondi chiari gli accenti al magenta per testo `#c42a5c` (solo su testo grande; il testo piccolo resta verde).
@@ -93,6 +93,7 @@ Le quattro proposte di colore (magenta, verde, rosa `#f6cfd9`, menta `#cde8dc`) 
 ## Caratteri
 
 - **La scritta dell'etichetta** (i tracciati originali del marchio, in tre pezzi: GASSOSA, — DEL —, MONACO): solo nella prima schermata, GASSOSA in carta e MONACO in verde, con le proporzioni dell'etichetta. Il DEL resta al centro, come sull'etichetta, e si legge attraverso il vetro. Sul telefono la scritta sta in alto e la bottiglia sotto.
+- **Montserrat 600**, maiuscolo: solo la frase del nastro, come sul retro dell'etichetta (parole chiave magenta, resto e punteggiatura verdi).
 - **Bricolage Grotesque 800**, maiuscolo, interlinea 0,88, spaziatura stretta: tutti gli altri titoli.
 - **Figtree**: testo, pulsanti, didascalie.
 
@@ -109,7 +110,7 @@ Le quattro proposte di colore (magenta, verde, rosa `#f6cfd9`, menta `#cde8dc`) 
 
 ## Movimento
 
-La bottiglia entra dal basso, fa un giro e mezzo e si ferma di fronte, poi galleggia; segue il mouse, gira con lo scroll e si fa girare trascinandola (36 fotogrammi WebP in `public/assets/giro/`, renderizzati in Cycles dal file Blender); le due righe del titolo si svelano dal basso; le bollicine, disegnate come sull'etichetta (sfere trasparenti con il bordo verde acqua più pieno in basso e un riflesso bianco in alto a destra; una trentina, di misure diverse), salgono veloci ondeggiando; gli ingredienti entrano uno dopo l'altro quando la lista compare. Con "riduci movimento" attivo tutto resta fermo.
+La bottiglia è ferma finché non parte il passaggio, poi fa un giro intero; si può anche far girare trascinandola (36 fotogrammi WebP in `public/assets/giro/`, renderizzati in Cycles dal file Blender); le due righe del titolo si svelano dal basso; le bollicine, disegnate come sull'etichetta (sfere trasparenti con il bordo verde acqua più pieno in basso e un riflesso bianco in alto a destra; una trentina, di misure diverse), salgono veloci ondeggiando; gli ingredienti entrano uno dopo l'altro quando la lista compare. Con "riduci movimento" attivo tutto resta fermo.
 
 ## Da non fare
 

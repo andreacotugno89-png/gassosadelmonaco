@@ -128,20 +128,25 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .nav-link:hover::after { transform: scaleX(1); }
 
 /* ---------- Prima schermata ---------- */
-.hero-pin { position: relative; height: 300svh; }
+
 .hero {
-  position: sticky; top: 0; height: 100svh; display: grid; grid-template-rows: 1fr;
+  position: relative; height: 100svh; display: grid; grid-template-rows: 1fr;
   padding-top: var(--nav-h); overflow: hidden; background: var(--magenta);
 }
-.hero::before {
-  content: ""; position: absolute; inset: 0; background: var(--green); pointer-events: none;
-  clip-path: circle(calc(var(--p, 0) * 150%) at 50% 52%);
+/* il cerchio verde parte dalla bottiglia e copre tutto; la scritta dentro è la stessa,
+   allineata al millimetro, con MONACO rosa: così MONACO cambia colore dove il cerchio passa */
+.hero__cerchio {
+  /* sale anche sotto il menu, così alla fine tutta la schermata è verde */
+  --cy: 50%;
+  position: absolute; inset: calc(-1 * var(--nav-h)) 0 0; z-index: 1; background: var(--green); pointer-events: none;
+  clip-path: circle(calc(var(--p, 0) * 150%) at 50% calc(var(--cy) + var(--nav-h) / 2));
 }
+.hero__cerchio > .hero__word { top: var(--nav-h); }
+@media (max-width: 767px) { .hero__cerchio { --cy: 64%; } }   /* sul telefono parte dalla bottiglia, più in basso */
+.hero__cerchio .hero__word .l2 { color: var(--pink); }
 @media (min-width: 768px) { .hero__bottle > * { transform: scale(calc(1 + var(--p, 0) * 0.14)); } }
 @media (prefers-reduced-motion: reduce) {
-  .hero-pin { height: auto; }
-  .hero { position: relative; height: auto; min-height: 100svh; }
-  .hero::before { display: none; }
+  .hero { height: auto; min-height: 100svh; }
 }
 .hero__stage { position: relative; display: grid; place-items: center; min-height: 0; }
 .hero__word {
@@ -155,7 +160,7 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .label-line--gassosa { width: calc(var(--w) * 0.749); }
 .label-line--monaco { width: var(--w); }
 .hero__word .l1 { color: var(--paper); }
-.hero__word .l2 { color: var(--t-acc); }
+.hero__word .l2 { color: var(--green); }
 .hero__del {
   display: flex; align-items: center; gap: 0.4em; margin: 0.35em 0 0.3em;
   font-size: calc(var(--w) * 0.052); color: var(--paper);
@@ -183,7 +188,6 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero__bottle { animation: bottle-in 1.2s var(--ease-out) both, bottle-float 7s ease-in-out 1.2s infinite; }
   .hero__word .l1 { animation: word-in 1s var(--ease-out) 0.05s both; }
   .hero__word .l2 { animation: word-in 1s var(--ease-out) 0.15s both; }
   .bubble { animation: bubble-rise var(--d, 9s) linear var(--delay, 0s) infinite; }
