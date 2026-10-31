@@ -48,6 +48,7 @@ html[data-theme="rosa"], html[data-theme="menta"] {
 html[data-theme="menta"] { --t-bg: var(--menta); }
 
 html {
+  scrollbar-gutter: stable;   /* lo spazio della barra di scorrimento è sempre riservato: la pagina non si sposta */
   scroll-padding-top: calc(var(--nav-h) + 1rem);
   scrollbar-color: var(--t-btn) var(--t-bg);
   -webkit-text-size-adjust: 100%;
@@ -150,8 +151,11 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .hero__rosa .hero__word .l2 { color: var(--pink); }
 @media (max-width: 767px) { .hero__cerchio, .hero__rosa { --cy: 64%; } }   /* sul telefono parte dalla bottiglia, più in basso */
 @media (min-width: 768px) { .hero__bottle > * { transform: scale(calc(1 + var(--p, 0) * 0.14)); } }
-/* durante il passaggio la pagina non scorre, nemmeno sui telefoni */
-html.passaggio, html.passaggio body { overflow: hidden; overscroll-behavior: none; touch-action: none; }
+/* durante il passaggio la pagina non scorre: sul computer basta fermare rotella e tasti, senza
+   nascondere la barra di scorrimento (che farebbe muovere la pagina); sui telefoni si ferma anche il dito */
+@media (pointer: coarse) {
+  html.passaggio, html.passaggio body { overflow: hidden; overscroll-behavior: none; touch-action: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   .hero { height: auto; min-height: 100svh; }
 }
