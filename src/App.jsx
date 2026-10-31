@@ -45,14 +45,6 @@ function Icon({ name }) {
   );
 }
 
-/* il fiore a quattro petali del tappo */
-function Flower() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-      <path d="M12 2c2.2 2.6 2.2 5.8 0 8.2C9.8 7.8 9.8 4.6 12 2Zm0 20c-2.2-2.6-2.2-5.8 0-8.2 2.2 2.4 2.2 5.6 0 8.2ZM2 12c2.6-2.2 5.8-2.2 8.2 0-2.4 2.2-5.6 2.2-8.2 0Zm20 0c-2.6 2.2-5.8 2.2-8.2 0 2.4-2.2 5.6-2.2 8.2 0Z" />
-    </svg>
-  );
-}
 
 /* ---------- la scritta dell'etichetta, in tre pezzi: GASSOSA, — DEL —, MONACO ---------- */
 /* Gli stessi tracciati del marchio, ritagliati riga per riga così la bottiglia può stare davanti. */
@@ -139,12 +131,14 @@ function BottleSpin() {
     };
     const tick = (now) => {
       const intro = Math.min(1, (now - t0) / 1800);
-      const scroll = heroProgress() * 360;            // scorrendo la prima schermata fa un giro intero
+      /* il giro intero si chiude al 75% della prima schermata: nell'ultimo tratto la bottiglia
+         resta ferma di fronte, poi la pagina riprende a scorrere */
+      const scroll = Math.min(1, heroProgress() / 0.75) * 360;
       if (!drag) spin *= 0.94;                       // inerzia dopo il trascinamento
       target += spin;
       const goal = target + pointer * 40 + scroll;
       if (intro < 1) angle = -540 * Math.pow(1 - intro, 3) + goal * intro;
-      else angle += (goal - angle) * 0.12;
+      else angle += (goal - angle) * 0.2;
       draw(angle);
       raf = requestAnimationFrame(tick);
     };
@@ -204,12 +198,16 @@ const BUBBLES = Array.from({ length: 28 }, (_, i) => {
 });
 
 /* ---------- il nastro che scorre ---------- */
-/* la frase del retro dell'etichetta */
-const NASTRO = ["Una ricetta semplice", "custodita dal tempo", "ritrovata nel gusto"];
+/* la frase del retro dell'etichetta, come è stampata: parole verdi e magenta, virgole e punto verdi */
+const NASTRO = [
+  ["Una ricetta ", ""], ["semplice", "m"], [", ", ""],
+  ["custodita dal ", ""], ["tempo", "m"], [", ", ""],
+  ["ritrovata nel ", ""], ["gusto", "m"], [".", ""],
+];
 function Ribbon() {
   const group = (hidden) => (
     <div className="ribbon__group" aria-hidden={hidden || undefined}>
-      {NASTRO.map((t) => <span key={t} className="ribbon__item">{t}<Flower /></span>)}
+      <span className="ribbon__item">{NASTRO.map(([t, c], i) => <span key={i} className={c ? "is-m" : undefined}>{t}</span>)}</span>
     </div>
   );
   return (
