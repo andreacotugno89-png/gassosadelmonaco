@@ -200,29 +200,21 @@ function BottleSpin() {
     if (!ready) return;
     const imgs = ready, c = canvas.current, ctx = c.getContext("2d");
     c.width = imgs[0].naturalWidth; c.height = imgs[0].naturalHeight;
-    let target = 0, last = "", drag = null, spin = 0, raf;   // target: i gradi aggiunti trascinando
-    const t0 = performance.now();
+    let target = 0, last = -1, drag = null, spin = 0, raf;   // target: i gradi aggiunti trascinando
 
-    /* tra un fotogramma e l'altro (10°) le due immagini vicine si sommano in dissolvenza:
-       con "lighter" il risultato è la media esatta, anche sui bordi trasparenti */
+    /* sempre un fotogramma intero e nitido: niente sovrapposizioni */
     const draw = (deg) => {
-      const f = ((deg / (360 / GIRO_N)) % GIRO_N + GIRO_N) % GIRO_N;
-      const i = Math.floor(f), k = Math.round((f - i) * 16) / 16, j = (i + 1) % GIRO_N;
-      const key = i + ":" + k;
-      if (key === last) return;
-      last = key;
+      const n = imgs.length;
+      const k = ((Math.round(deg / (360 / n)) % n) + n) % n;
+      if (k === last) return;
+      last = k;
       ctx.clearRect(0, 0, c.width, c.height);
-      if (k === 0) { ctx.drawImage(imgs[i], 0, 0); return; }
-      ctx.globalCompositeOperation = "lighter";
-      ctx.globalAlpha = 1 - k; ctx.drawImage(imgs[i], 0, 0);
-      ctx.globalAlpha = k; ctx.drawImage(imgs[j], 0, 0);
-      ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+      ctx.drawImage(imgs[k], 0, 0);
     };
-    const tick = (now) => {
+    const tick = () => {
       if (!drag) spin *= 0.94;                       // inerzia dopo il trascinamento
       target += spin;
-      const dondolo = Math.sin((now - t0) / 1100) * 14;   // da ferma ondeggia di ±14°, come in mano
-      draw(heroP * 360 + target + dondolo);          // il giro intero va di pari passo con il cerchio
+      draw(heroP * 360 + target);                    // il giro intero va di pari passo con il cerchio
       raf = requestAnimationFrame(tick);
     };
     const onMove = (e) => {
