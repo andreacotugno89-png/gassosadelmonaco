@@ -353,7 +353,7 @@ const TAPPE = [
   { quando: "Anni 40", titolo: "Il tappo a leva", bottiglia: "1949", w: 156,
     alt: "Bottiglia con tappo meccanico e la scritta in rilievo Giuseppe di Pasquale Gassose Bovino",
     testo: "La bottiglia cambiava nel tempo, ma dentro la gassosa restava sempre la stessa." },
-  { quando: "Anni 60", titolo: "Tempi nuovi", sottotitolo: "La ricetta aspetta", foto: ASSETS.storia3, w: 1280, h: 883, tilt: "-1.5deg",
+  { quando: "Anni 60", titolo: "Tempi nuovi", foto: ASSETS.storia3, w: 1280, h: 883, tilt: "-1.5deg",
     alt: "La famiglia riunita attorno a un tavolo con le bottiglie di gassosa al centro",
     testo: "Arrivarono i frigoriferi e le bibite industriali. La gassosa si fece ancora per qualche anno, ma piano piano la famiglia si dedicò soltanto alla distribuzione di bevande. La ricetta restò in casa, in attesa." },
   { quando: "2026", anno: true, oggi: true, titolo: "Di nuovo in bottiglia", bottiglia: "2026", w: 146,
