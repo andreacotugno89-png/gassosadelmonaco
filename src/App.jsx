@@ -347,7 +347,7 @@ const TAPPE = [
   { quando: "Anni 30", titolo: "La bottiglia con la pallina", sottotitolo: "Un'icona di quegli anni", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
     testo: "La chiusura a pallina era il segno delle gassose di quel tempo, e anche i Di Pasquale la producevano così, con il nome della famiglia in rilievo sul vetro." },
-  { titolo: "Giorni di festa", sottotitolo: "Una bibita per tutti", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
+  { titolo: "Insieme", sottotitolo: "Una bibita per tutti", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
     alt: "Giovani in festa davanti alla chiesa, con le bottiglie alzate",
     testo: "Dalle pause nei campi alle feste in paese: la gassosa era di tutti." },
   { quando: "1949", anno: true, titolo: "Il tappo meccanico", bottiglia: "1949", w: 156,
