@@ -337,7 +337,7 @@ function Ingredients({ items }) {
 /* I fatti vengono dal racconto della famiglia, come riportato da TeleBovino (8 agosto 2026).
    Le bottiglie sono ritagliate dal volantino "Dal 1912" con la stessa altezza, così restano in scala. */
 const TAPPE = [
-  { quando: "1912", anno: true, titolo: "Due Giuseppe, una gassosa", bottiglia: "1912", w: 230,
+  { quando: "1912", anno: true, titolo: "Tutto comincia nell'osteria", bottiglia: "1912", w: 230,
     alt: "Sifone da seltz in vetro blu con la testa incisa Di Pasquale Bovino",
     testo: "Nell'osteria di famiglia, a Bovino, si vendevano il vino e il ghiaccio delle neviere. È qui che due uomini con lo stesso nome, il nonno Giuseppe di Pasquale e suo zio, anche lui Giuseppe di Pasquale, cominciarono a produrre gassose." },
   { quando: "Il segreto", titolo: "Il succo di limone", foto: ASSETS.storia1, w: 1280, h: 927, tilt: "-2deg",
