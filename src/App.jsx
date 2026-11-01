@@ -20,6 +20,7 @@ const CONTATTI = {
   tel:       "+39 333 381 5608",
   telHref:   "+393333815608",
   instagram: "dipasquale1912",
+  facebook:  "#",   // DA FARE: il link della pagina Facebook, lo manda la famiglia
 };
 
 /* Gli ordini passano per email: oggetto e testo già scritti */
@@ -37,6 +38,7 @@ function Icon({ name }) {
       {name === "chat" && <path {...p} d="M4.5 19.5l1.2-3.6A7.5 7.5 0 1 1 8.6 18.6L4.5 19.5Z M9 10.5h6 M9 13.5h4" />}
       {name === "phone" && <path {...p} d="M6.6 3.5h2.6l1.3 4-1.9 1.3a10.5 10.5 0 0 0 6.6 6.6l1.3-1.9 4 1.3v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z" />}
       {name === "mail" && <><rect {...p} x="3.5" y="5.5" width="17" height="13" rx="1.5" /><path {...p} d="M4 6.5l8 6 8-6" /></>}
+      {name === "facebook" && <><rect {...p} x="3.5" y="3.5" width="17" height="17" rx="5" /><path {...p} d="M15.5 8h-1.6a2.4 2.4 0 0 0-2.4 2.4v10.1 M9.5 13h5.5" /></>}
       {name === "camera" && <><rect {...p} x="3.5" y="3.5" width="17" height="17" rx="5" /><circle {...p} cx="12" cy="12" r="4" /><circle cx="17" cy="7" r="1" fill="currentColor" /></>}
       {name === "menu" && <path {...p} d="M4 7h16M4 12h16M4 17h16" />}
       {name === "close" && <path {...p} d="M6 6l12 12M18 6L6 18" />}
@@ -603,8 +605,11 @@ export default function App() {
       <footer className="footer py-12">
         <div className="wrap flex flex-col items-center gap-6">
           <img src={ASSETS.logoWhite} alt="Di Pasquale 1912" width="1200" height="360" loading="lazy" className="h-12 md:h-14 w-auto" />
-          <a href={`https://www.instagram.com/${CONTATTI.instagram}/`} target="_blank" rel="noopener"
-            aria-label={`Instagram, @${CONTATTI.instagram}`} className="footer__ig"><Icon name="camera" /></a>
+          <div className="flex gap-3">
+            <a href={`https://www.instagram.com/${CONTATTI.instagram}/`} target="_blank" rel="noopener"
+              aria-label={`Instagram, @${CONTATTI.instagram}`} className="footer__ig"><Icon name="camera" /></a>
+            <a href={CONTATTI.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="footer__ig"><Icon name="facebook" /></a>
+          </div>
           <div className="footer__firme text-center text-sm space-y-1">
             <p className="m-0">Di Pasquale 1912 · Gassosa del Monaco © 2026</p>
             <p className="m-0">Designed by STUDIO NWIT</p>
