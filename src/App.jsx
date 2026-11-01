@@ -344,7 +344,7 @@ const TAPPE = [
     alt: "Ragazzi e uomini in posa durante la trebbiatura, con un cavallo e la trebbiatrice",
     sottotitolo: "Una pausa tra i campi",
     testo: "La gassosa era fatta per momenti così, semplici, di tutti i giorni." },
-  { quando: "1930", anno: true, titolo: "Il nome sul vetro", sottotitolo: "Prima delle etichette", bottiglia: "1930", w: 124,
+  { quando: "Anni Trenta", titolo: "Il nome sul vetro", sottotitolo: "Prima delle etichette", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
     testo: "Non c'erano marchi né etichette: a fare la gassosa bastava il nome della famiglia." },
   { quando: "Oltre Bovino", titolo: "Per i paesi del Subappennino", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
