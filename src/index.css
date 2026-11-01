@@ -344,18 +344,46 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (max-width: 859px) { .sticker { left: auto; right: 1rem; bottom: -2rem; } }
 
-/* ---------- Ordini ---------- */
-.order-card {
-  background: var(--paper); color: var(--green); border-radius: var(--radius);
-  padding: clamp(1.75rem, 3vw, 2.75rem); display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;
-  box-shadow: 0 30px 50px -34px rgba(70, 0, 25, 0.7);
+/* ---------- Ordini: la cartolina ---------- */
+.cartolina {
+  position: relative; margin: clamp(2.5rem, 5vw, 3.75rem) auto 0; width: min(62rem, 100%);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(1.5rem, 4vw, 2.75rem);
+  padding: clamp(1.5rem, 3.5vw, 2.75rem); background: #fff; color: var(--green); border-radius: 18px; transform: rotate(-1.5deg);
+  box-shadow: 0 30px 50px -28px rgba(14, 74, 67, 0.6), 0 4px 10px -4px rgba(14, 74, 67, 0.2);
 }
-.order-card p { margin: 0.75rem 0 0; font-size: 1.08rem; color: #1c544c; }
-.contact-list { display: grid; margin-inline: 0; margin-bottom: 0; border-top: 2px solid var(--t-line); }
-.contact-list__row { display: grid; gap: 0.2rem 1.5rem; padding-block: 1.1rem; border-bottom: 2px solid var(--t-line); }
-.contact-list dt { font-weight: 500; color: var(--t-soft); }
-@media (min-width: 640px) {
-  .contact-list__row { grid-template-columns: 14rem minmax(0, 1fr); align-items: baseline; }
+.cartolina::before {   /* la riga che divide il messaggio dall'indirizzo */
+  content: ""; position: absolute; top: clamp(1.5rem, 3.5vw, 2.75rem); bottom: clamp(1.5rem, 3.5vw, 2.75rem); left: 50%; width: 2px; background: rgba(14, 74, 67, 0.18);
+}
+.cartolina__msg p { margin: 0 0 1.6rem; font-size: clamp(1.15rem, 1.6vw, 1.35rem); line-height: 1.5; }
+.cartolina__btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.4rem; margin-top: 0.75rem; padding: 0.8rem 1.6rem;
+  border: 2px solid var(--green); border-radius: 999px; color: var(--green); font-weight: 700; font-size: 1.08rem; text-decoration: none;
+  transition: transform 0.2s var(--ease-out), background-color 0.2s;
+}
+.cartolina__btn:hover { transform: translateX(4px); background: rgba(14, 74, 67, 0.06); }
+.cartolina__btn.is-pieno { background: var(--magenta-ink); border-color: var(--magenta-ink); color: #fff; }
+.cartolina__btn.is-pieno:hover { background: var(--magenta-d); border-color: var(--magenta-d); }
+.cartolina__indirizzo { position: relative; display: flex; flex-direction: column; }
+.cartolina__francobollo { align-self: flex-end; width: clamp(6rem, 11vw, 8.5rem); height: auto; }
+.cartolina__timbro {
+  position: absolute; top: 0; right: clamp(7rem, 12vw, 10rem); width: 7.5rem; height: 7.5rem; display: grid; place-items: center;
+  border: 3px solid var(--magenta-ink); border-radius: 50%; color: var(--magenta-ink); opacity: 0.8; transform: rotate(-14deg);
+  font: 600 0.8rem/1.2 "Montserrat", var(--font-body); text-transform: uppercase; text-align: center;
+}
+.cartolina__timbro b { display: block; font: 800 1.6rem/1 var(--font-display); }
+.cartolina__righe { margin: auto 0 0; padding-top: 1rem; }
+.cartolina__righe > div { padding: 0.8rem 0 0.45rem; border-bottom: 2px solid rgba(14, 74, 67, 0.25); }
+.cartolina__righe dt { font-size: 0.85rem; font-weight: 500; color: #2a5a53; }
+.cartolina__righe dd { margin: 0.1rem 0 0; font-size: 1.2rem; font-weight: 700; overflow-wrap: anywhere; }
+.cartolina__righe a { text-decoration: none; }
+.cartolina__righe a:hover { text-decoration: underline; }
+@media (max-width: 767px) {
+  .cartolina { grid-template-columns: minmax(0, 1fr); transform: rotate(-1deg); }
+  .cartolina::before, .cartolina__timbro { display: none; }
+  .cartolina__indirizzo { position: static; margin-top: 1.75rem; padding-top: 0.5rem; border-top: 2px solid rgba(14, 74, 67, 0.18); }
+  .cartolina__francobollo { position: absolute; top: -2.2rem; right: -0.8rem; width: 5.5rem; }
+  .cartolina__msg p { padding-right: 3.5rem; }   /* il testo non finisce sotto il francobollo */
+  .cartolina__btn { padding-inline: 1.25rem; }
 }
 
 /* ---------- Mobile ---------- */

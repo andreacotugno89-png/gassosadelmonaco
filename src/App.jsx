@@ -572,44 +572,36 @@ export default function App() {
           </div>
         </section>
 
-        {/* ===================== ORDINI ===================== */}
+        {/* ===================== ORDINI: la cartolina ===================== */}
+        {/* Come le foto d'archivio, una cartolina un po' storta: a sinistra si sceglie chi si è
+           (la email parte già scritta), a destra i recapiti al posto dell'indirizzo, il tappo come francobollo. */}
         <section id="contatti" data-theme="beige" className="py-24 md:py-36">
           <div className="wrap">
-            <h2 className="display h-xl">Ordinala.</h2>
-            <p className="lead mt-6 mb-0 measure">Ritrova il gusto di una volta. Per informazioni e ordini, scrivici una email: ti rispondiamo noi.</p>
-
-            <div className="grid md:grid-cols-2 gap-6 mt-14">
-              {[
-                ["Per bar, ristoranti e negozi", "Scrivici per formati, quantità e condizioni per il tuo locale.", MAIL_LOCALI],
-                ["Per la tua tavola", "Scrivici per ordinare qualche bottiglia per casa.", MAIL_PRIVATI],
-              ].map(([titolo, testo, mail]) => (
-                <div key={titolo} className="order-card">
-                  <div>
-                    <h3 className="display h-md">{titolo}</h3>
-                    <p>{testo}</p>
-                  </div>
-                  <a href={mail} className="btn btn--magenta mt-auto"><Icon name="mail" />Scrivici una email</a>
-                </div>
-              ))}
+            <h2 className="display h-xl text-center">Ordinala<span className="acc">.</span></h2>
+            <div className="cartolina">
+              <div className="cartolina__msg">
+                <p>Per ordinare la Gassosa del Monaco basta scriverci. Scegli chi sei e la email è già pronta.</p>
+                <a href={MAIL_LOCALI} className="cartolina__btn is-pieno">Ho un bar, un ristorante, un negozio <span aria-hidden="true">→</span></a>
+                <a href={MAIL_PRIVATI} className="cartolina__btn">La voglio per casa <span aria-hidden="true">→</span></a>
+              </div>
+              <div className="cartolina__indirizzo">
+                <img src={ASSETS.seal} alt="" width="800" height="800" loading="lazy" className="cartolina__francobollo" />
+                <div className="cartolina__timbro" aria-hidden="true"><span>Bovino<b>1912</b>Gassose</span></div>
+                <dl className="cartolina__righe">
+                  {[
+                    ["Email", `mailto:${CONTATTI.email}`, CONTATTI.email],
+                    ["Telefono", `tel:${CONTATTI.telHref}`, CONTATTI.tel],
+                    ["Instagram", `https://www.instagram.com/${CONTATTI.instagram}/`, `@${CONTATTI.instagram}`],
+                    ["Da", null, "Bovino (FG)"],
+                  ].map(([label, href, value]) => (
+                    <div key={label}>
+                      <dt>{label}</dt>
+                      <dd>{href ? <a href={href} {...(label === "Instagram" ? { target: "_blank", rel: "noopener" } : {})}>{value}</a> : value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </div>
-
-            <dl className="contact-list mt-14">
-              {[
-                ["Email per gli ordini", `mailto:${CONTATTI.email}`, CONTATTI.email, "mail"],
-                ["Telefono", `tel:${CONTATTI.telHref}`, CONTATTI.tel, "phone"],
-                ["Instagram", `https://www.instagram.com/${CONTATTI.instagram}/`, `@${CONTATTI.instagram}`, "camera"],
-              ].map(([label, href, value, icon]) => (
-                <div key={label} className="contact-list__row">
-                  <dt>{label}</dt>
-                  <dd className="m-0">
-                    <a href={href} {...(icon === "camera" ? { target: "_blank", rel: "noopener" } : {})}
-                      className="inline-flex items-center gap-3 text-xl font-bold no-underline hover:underline break-all">
-                      <span className="block w-6 h-6 flex-none"><Icon name={icon} /></span>{value}
-                    </a>
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </section>
       </main>

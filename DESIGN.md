@@ -100,6 +100,7 @@ Quattro fondi convivono (magenta, verde, il beige dell'etichetta `#f0e4d0` e il 
 ## Componenti
 
 - **Ordini**: tutti i pulsanti d'ordine aprono un'email già scritta a dipasquale1912@gmail.com (oggetto e traccia diversi per locali e privati).
+- **La cartolina** (sezione ordini): una cartolina bianca un po' storta sul beige, come le foto d'archivio. A sinistra il messaggio e i due pulsanti (locali in magenta pieno, privati con il bordo); a destra, dopo la riga che divide, i recapiti scritti come un indirizzo, il tappo come francobollo e un timbro "Bovino 1912 Gassose". Sul telefono le due metà vanno una sotto l'altra e il timbro sparisce.
 - **Pulsanti**: a pillola. Nella prima schermata il pulsante "Ordina" del menu è color carta con testo verde, leggibile sul magenta e sul verde. Verde sul magenta, magenta sulla carta. Al passaggio del mouse salgono di 2px con un'ombra morbida.
 - **Pastiglie**: gli ingredienti in pillole bordate.
 - **Nastro**: banda carta con scritte verdi che scorre con la frase del retro dell'etichetta, "Una ricetta semplice · custodita dal tempo · ritrovata nel gusto", separata dal fiore magenta del tappo.
