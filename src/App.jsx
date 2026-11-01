@@ -575,7 +575,7 @@ export default function App() {
             <h2 className="display h-xl text-center">Ordinala<span className="acc">.</span></h2>
             <div className="cartolina">
               <div className="cartolina__msg">
-                <p>Per ordinare la Gassosa del Monaco basta scriverci. Scegli chi sei e la email è già pronta.</p>
+                <p>Per ordinare la Gassosa del Monaco basta scriverci.</p>
                 <a href={MAIL_LOCALI} className="cartolina__btn is-pieno">Ho un bar, un ristorante, un negozio <span aria-hidden="true">→</span></a>
                 <a href={MAIL_PRIVATI} className="cartolina__btn">La voglio per casa <span aria-hidden="true">→</span></a>
               </div>
