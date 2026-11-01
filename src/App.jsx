@@ -352,7 +352,7 @@ const TAPPE = [
     testo: "Dalle pause nei campi alle feste in paese: la gassosa era di tutti." },
   { quando: "Anni 40", titolo: "Il tappo a leva", bottiglia: "1949", w: 156,
     alt: "Bottiglia con tappo meccanico e la scritta in rilievo Giuseppe di Pasquale Gassose Bovino",
-    testo: "Arrivò il tappo a leva e la bottiglia cambiò. Ma dentro, la gassosa era sempre la stessa." },
+    testo: "La bottiglia cambiava nel tempo, ma dentro la gassosa restava sempre la stessa." },
   { quando: "Anni Sessanta", titolo: "Arriva la modernità", foto: ASSETS.storia3, w: 1280, h: 883, tilt: "-1.5deg",
     alt: "La famiglia riunita attorno a un tavolo con le bottiglie di gassosa al centro",
     testo: "Con i frigoriferi il ghiaccio serviva sempre meno, e arrivavano Coca-Cola, aranciata e birra. La gassosa si fece fino agli anni Sessanta, poi la famiglia passò alla distribuzione di bevande. La ricetta restò in casa." },
