@@ -530,7 +530,7 @@ export default function App() {
           <div className="wrap">
             <div data-theme="bianco">
               <h2 className="display h-xl">Dal 1912. <span className="acc">Una storia che continua.</span></h2>
-              <p className="lead measure mt-8 mb-0">Dall'osteria alla bottiglia di oggi: la gassosa di Bovino, come la racconta la famiglia.</p>
+              <p className="lead measure mt-8 mb-0">Dall'osteria alla bottiglia di oggi: la nostra gassosa, come la racconta la famiglia.</p>
             </div>
             <Timeline />
           </div>
