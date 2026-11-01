@@ -343,7 +343,7 @@ const TAPPE = [
   { titolo: "Le prime bottiglie", foto: ASSETS.storia1, w: 1280, h: 927, tilt: "-2deg",
     alt: "Ragazzi e uomini in posa durante la trebbiatura, con un cavallo e la trebbiatrice",
     sottotitolo: "Una pausa durante il lavoro",
-    testo: "La gassosa era fatta per momenti così: una bottiglia da passarsi tra compagni, prima di tornare al lavoro." },
+    testo: "La gassosa era fatta per momenti così, semplici, di tutti i giorni." },
   { quando: "1930", anno: true, titolo: "La bottiglia con la biglia", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
     testo: "Una pallina di vetro chiudeva il collo, prima dei tappi meccanici. Sul vetro, in rilievo, c'era soltanto il nome del produttore: le etichette non esistevano ancora." },
