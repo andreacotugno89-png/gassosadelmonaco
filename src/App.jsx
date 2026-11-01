@@ -611,7 +611,7 @@ export default function App() {
             <a href={CONTATTI.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="footer__ig"><Icon name="facebook" /></a>
           </div>
           <div className="footer__firme text-center text-sm space-y-1">
-            <p className="m-0">Di Pasquale 1912 · Gassosa del Monaco © 2026</p>
+            <p className="m-0">© 2026 Di Pasquale 1912 · Gassosa del Monaco</p>
             <p className="m-0">Designed by STUDIO NWIT</p>
           </div>
         </div>
