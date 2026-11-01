@@ -19,7 +19,6 @@ const CONTATTI = {
   email:     "dipasquale1912@gmail.com",
   tel:       "+39 333 381 5608",
   telHref:   "+393333815608",
-  instagram: "dipasquale1912",
 };
 
 /* Gli ordini passano per email: oggetto e testo già scritti */
@@ -585,12 +584,11 @@ export default function App() {
                   {[
                     ["Email", `mailto:${CONTATTI.email}`, CONTATTI.email],
                     ["Telefono", `tel:${CONTATTI.telHref}`, CONTATTI.tel],
-                    ["Instagram", `https://www.instagram.com/${CONTATTI.instagram}/`, `@${CONTATTI.instagram}`],
                     ["Da", null, "Bovino (FG)"],
                   ].map(([label, href, value]) => (
                     <div key={label}>
                       <dt>{label}</dt>
-                      <dd>{href ? <a href={href} {...(label === "Instagram" ? { target: "_blank", rel: "noopener" } : {})}>{value}</a> : value}</dd>
+                      <dd>{href ? <a href={href}>{value}</a> : value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -600,17 +598,10 @@ export default function App() {
         </section>
       </main>
 
-      {/* ===================== FOOTER ===================== */}
-      <footer data-theme="verde" className="py-12">
-        <div className="wrap">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <img src={ASSETS.logoWhite} alt="Di Pasquale 1912" width="1200" height="360" loading="lazy" className="h-12 md:h-14 w-auto" />
-            <p className="m-0 font-medium">Bibita analcolica gassata</p>
-          </div>
-          <div className="soft mt-8 pt-8 text-center text-sm space-y-2" style={{ borderTop: "2px solid var(--t-line)" }}>
-            <p className="m-0">Ricetta originale ideata da Giuseppe di Pasquale · Bovino (FG), 1912</p>
-            <p className="m-0">© {new Date().getFullYear()} Gassosa del Monaco · Di Pasquale 1912</p>
-          </div>
+      {/* ===================== FOOTER: solo il logo, sempre sul verde ===================== */}
+      <footer className="footer py-12">
+        <div className="wrap flex justify-center">
+          <img src={ASSETS.logoWhite} alt="Di Pasquale 1912" width="1200" height="360" loading="lazy" className="h-12 md:h-14 w-auto" />
         </div>
       </footer>
     </div>

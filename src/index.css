@@ -336,6 +336,9 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .photo { position: relative; }
 .photo img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
 
+/* il piede ha il suo verde fisso: è troppo basso per cambiare il colore della pagina */
+.footer { background: var(--green); }
+
 /* ---------- Ordini: la cartolina ---------- */
 .cartolina {
   position: relative; margin: clamp(2.5rem, 5vw, 3.75rem) auto 0; width: min(62rem, 100%);
