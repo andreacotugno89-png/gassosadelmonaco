@@ -542,7 +542,7 @@ export default function App() {
             <h2 className="display name-q">E il <span className="acc">monaco?</span></h2>
             <p className="lead mt-8 mb-0 max-w-xl">L'abito che non è stato mai indossato.</p>
             <div className="monaco-racconto mt-12 space-y-5 text-left">
-              <p>Secondo il racconto di famiglia, lo zio del nonno Giuseppe voleva farsi monaco e andò al monastero di Montevergine. In prova lo misero in cucina, e ogni giorno i frati gli chiedevano che cosa avrebbe preparato. La risposta doveva essere sempre la stessa: pasta e fagioli, se fossero arrivati gli ingredienti.</p>
+              <p>Secondo il racconto di famiglia, lo zio di Giuseppe, «il Monaco», voleva farsi monaco davvero ed entrò in monastero. In prova lo misero in cucina, e ogni giorno i frati gli chiedevano che cosa avrebbe preparato. La risposta doveva essere sempre la stessa: pasta e fagioli, se fossero arrivati gli ingredienti.</p>
               <p>Giorno dopo giorno, la stessa domanda. Finché la pazienza finì, e la risposta non fu proprio da monaco. Lasciò il monastero e tornò a Bovino: per tutti, da allora, fu il Monaco.</p>
             </div>
             <img src={ASSETS.signature} alt="Firma di Giuseppe di Pasquale" width="2340" height="523" loading="lazy"
