@@ -543,7 +543,7 @@ export default function App() {
             <p className="lead mt-8 mb-0 max-w-xl">L'abito che non è stato mai indossato.</p>
             <div className="monaco-racconto mt-12 space-y-5 text-left">
               <p>Secondo il racconto di famiglia, lo zio di Giuseppe, «il Monaco», voleva farsi monaco davvero ed entrò in monastero. Lo misero in cucina e lo sottoposero a una prova di pazienza: ogni giorno i frati gli chiedevano che cosa avrebbe preparato. La risposta doveva essere sempre la stessa: pasta e fagioli, se fossero arrivati gli ingredienti.</p>
-              <p>Giorno dopo giorno, la stessa domanda. Finché la pazienza finì, e la risposta non fu proprio da monaco. Lasciò il monastero e tornò a Bovino: per tutti, da allora, fu il Monaco.</p>
+              <p>Giorno dopo giorno, la stessa domanda. Finché la pazienza finì: la risposta non fu proprio da monaco, e la prova di pazienza non la superò affatto. Lasciò il monastero e tornò a Bovino: per tutti, da allora, fu il Monaco.</p>
             </div>
             <img src={ASSETS.signature} alt="Firma di Giuseppe di Pasquale" width="2340" height="523" loading="lazy"
               className="mt-12 h-14 md:h-16 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
