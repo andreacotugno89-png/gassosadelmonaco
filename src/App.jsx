@@ -342,7 +342,7 @@ const TAPPE = [
     testo: "Nell'osteria di famiglia si vendevano il vino e il ghiaccio delle neviere. Qui Giuseppe di Pasquale cominciò a fare le prime gassose insieme a suo zio, «il Monaco». Ma questa è un'altra storia." },
   { titolo: "Le prime bottiglie", foto: ASSETS.storia1, w: 1280, h: 927, tilt: "-2deg",
     alt: "Ragazzi e uomini in posa durante la trebbiatura, con un cavallo e la trebbiatrice",
-    sottotitolo: "Una pausa tra i campi",
+    sottotitolo: "Una pausa nei campi",
     testo: "La gassosa era fatta per momenti così, semplici, di tutti i giorni." },
   { quando: "Anni 30", titolo: "La bottiglia con la pallina", sottotitolo: "Un'icona di quegli anni", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
