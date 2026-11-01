@@ -599,12 +599,16 @@ export default function App() {
         </section>
       </main>
 
-      {/* ===================== FOOTER: il logo e Instagram, sempre sul verde ===================== */}
+      {/* ===================== FOOTER: il logo, Instagram e le firme, sempre sul verde ===================== */}
       <footer className="footer py-12">
         <div className="wrap flex flex-col items-center gap-6">
           <img src={ASSETS.logoWhite} alt="Di Pasquale 1912" width="1200" height="360" loading="lazy" className="h-12 md:h-14 w-auto" />
           <a href={`https://www.instagram.com/${CONTATTI.instagram}/`} target="_blank" rel="noopener"
             aria-label={`Instagram, @${CONTATTI.instagram}`} className="footer__ig"><Icon name="camera" /></a>
+          <div className="footer__firme text-center text-sm space-y-1">
+            <p className="m-0">Di Pasquale 1912 · Gassosa del Monaco © 2026</p>
+            <p className="m-0">Designed by STUDIO NWIT</p>
+          </div>
         </div>
       </footer>
     </div>

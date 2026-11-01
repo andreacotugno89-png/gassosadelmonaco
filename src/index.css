@@ -337,7 +337,8 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .photo img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
 
 /* il piede ha il suo verde fisso: è troppo basso per cambiare il colore della pagina */
-.footer { background: var(--green); }
+.footer { background: var(--green); color: var(--cream); }
+.footer__firme { color: rgba(251, 239, 221, 0.8); }
 .footer__ig { display: grid; place-items: center; width: 3rem; height: 3rem; color: var(--cream); border-radius: 50%; transition: background-color 0.2s, color 0.2s; }
 .footer__ig svg { width: 1.75rem; height: 1.75rem; }
 .footer__ig:hover { background: var(--pink); color: var(--green); }
