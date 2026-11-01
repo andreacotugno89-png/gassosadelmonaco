@@ -532,7 +532,7 @@ export default function App() {
         <Ribbon />
 
         {/* ===================== STORIA: la linea del tempo ===================== */}
-        <section id="storia" className="py-24 md:py-36">
+        <section id="storia" className="pt-24 md:pt-36 pb-10 md:pb-16">
           <div className="wrap">
             <div data-theme="bianco">
               <h2 className="display h-xl">Dal 1912. <span className="acc">Una storia che continua.</span></h2>

@@ -237,7 +237,7 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 /* La foto come una stampa: bordo carta, angoli morbidi, un po' storta */
 .print { margin: 0; }
 .print__frame {
-  background: #fff; padding: 0.7rem; border-radius: 18px; transform: rotate(var(--tilt, -2deg));
+  width: fit-content; max-width: 100%; background: #fff; padding: 0.7rem; border-radius: 18px; transform: rotate(var(--tilt, -2deg));
   box-shadow: 0 26px 40px -24px rgba(14, 74, 67, 0.55), 0 4px 10px -4px rgba(14, 74, 67, 0.2);
   transition: transform 0.6s var(--ease-out);
 }
@@ -249,7 +249,12 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 /* ---------- La linea del tempo ----------
    Una linea al centro che si riempie scorrendo; a turno, a destra e a sinistra,
    una foto d'archivio e una bottiglia di famiglia nella sua nicchia. */
-.timeline { position: relative; list-style: none; margin: clamp(3.5rem, 7vw, 6rem) 0 0; padding: 0; --x: 50%; }
+/* Il ritmo: ogni tappa ha la stessa altezza d'immagine (--media-h), foto o bottiglia che sia,
+   e lo stesso spazio prima e dopo. Le foto stanno dentro quel riquadro senza tagli. */
+.timeline {
+  position: relative; list-style: none; margin: clamp(3.5rem, 7vw, 6rem) 0 0; padding: 0; --x: 50%;
+  --media-h: clamp(18rem, 28vw, 25rem);
+}
 .timeline::before, .timeline__fill {
   content: ""; position: absolute; top: 0; bottom: 0; left: var(--x); width: 3px; margin-left: -1.5px; border-radius: 3px;
 }
@@ -257,7 +262,7 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .timeline__fill { background: var(--t-acc); transform-origin: top; transform: scaleY(var(--tl, 0)); }
 .tappa {
   position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center;
-  column-gap: clamp(4rem, 9vw, 8rem); padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  column-gap: clamp(4rem, 9vw, 8rem); padding-block: clamp(2.25rem, 4vw, 3.5rem);
 }
 .tappa::after {
   content: ""; position: absolute; left: var(--x); top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
@@ -266,7 +271,12 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .tappa.is-in::after { background: var(--t-acc); transform: scale(1.1); }
 .tappa--flip .tappa__media { order: 2; }
 .tappa__media { display: flex; justify-content: center; }
-.tappa__media .print { width: 100%; max-width: 34rem; }
+.tappa__media .print { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
+.tappa__media .print__frame img { width: auto; max-width: 100%; max-height: var(--media-h); }
+.tappa__media .print figcaption { max-width: 22rem; text-align: center; }
+.tappa__testo { max-width: 32rem; }
+.tappa:not(.tappa--flip) .tappa__testo { justify-self: start; }
+.tappa--flip .tappa__testo { justify-self: end; }
 .tappa__testo p.soft { margin: 1rem 0 0; font-size: 1.12rem; }
 .tappa__quando { margin: 0; color: var(--t-acc); font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
 .tappa__quando.is-anno { font-size: clamp(3.4rem, 7vw, 6rem); line-height: 0.85; letter-spacing: -0.02em; }
@@ -274,14 +284,14 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 
 /* la bottiglia scontornata, in piedi sul fondo della sezione, con la sua ombra */
 .nicchia { margin: 0; display: flex; flex-direction: column; align-items: center; }
-.nicchia__fondo { position: relative; display: flex; align-items: flex-end; justify-content: center; height: clamp(20rem, 36vw, 30rem); }
+.nicchia__fondo { position: relative; display: flex; align-items: flex-end; justify-content: center; height: var(--media-h); }
 .nicchia__fondo::after {
   content: ""; position: absolute; left: 50%; bottom: -0.6rem; width: 70%; height: 1.4rem; transform: translateX(-50%);
   border-radius: 50%; background: radial-gradient(closest-side, rgba(14, 74, 67, 0.32), rgba(14, 74, 67, 0));
 }
 .nicchia__fondo img { position: relative; z-index: 1; height: 100%; width: auto; max-width: none; transition: transform 0.6s var(--ease-out); }
 .nicchia:hover img { transform: translateY(-8px) rotate(-2deg); }
-.nicchia figcaption { margin-top: 1.6rem; max-width: 17rem; text-align: center; font-weight: 500; font-size: 0.98rem; color: var(--t-soft); }
+.nicchia figcaption { margin-top: 1.1rem; max-width: 17rem; text-align: center; font-weight: 500; font-size: 0.98rem; color: var(--t-soft); }
 
 @media (prefers-reduced-motion: no-preference) {
   .js .tappa__media, .js .tappa__testo { transition: transform 1s var(--ease-out), clip-path 1s var(--ease-out); }
@@ -291,11 +301,14 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
   .js .tappa:not(.is-in) .tappa__testo { transform: translateY(2rem); clip-path: inset(0 0 100% 0); }
 }
 @media (max-width: 859px) {
-  .timeline { --x: 0.75rem; }
-  .tappa { grid-template-columns: minmax(0, 1fr); row-gap: 2rem; padding-left: 2.75rem; }
+  .timeline { --x: 0.75rem; --media-h: min(21rem, 62vw); }
+  .tappa { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; padding-left: 2.75rem; padding-block: 2rem; }
+  .tappa .tappa__testo { justify-self: start; }
   .tappa::after { top: 3.5rem; }
   .tappa--flip .tappa__media { order: 0; }
   .tappa__media { justify-content: flex-start; }
+  .tappa__media .print, .nicchia { align-items: flex-start; }
+  .tappa__media .print figcaption, .nicchia figcaption { text-align: left; }
 }
 
 /* ---------- Il nome ---------- *//* ---------- Il nome ---------- */
