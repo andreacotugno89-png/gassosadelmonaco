@@ -342,7 +342,8 @@ const TAPPE = [
     testo: "Nell'osteria di famiglia si vendevano il vino e il ghiaccio delle neviere. Qui Giuseppe di Pasquale cominciò a fare le prime gassose insieme a suo zio, «il Monaco». Ma questa è un'altra storia." },
   { titolo: "Le prime bottiglie", foto: ASSETS.storia1, w: 1280, h: 927, tilt: "-2deg",
     alt: "Ragazzi e uomini in posa durante la trebbiatura, con un cavallo e la trebbiatrice",
-    testo: "Una pausa durante il lavoro. La gassosa era fatta per momenti così." },
+    sottotitolo: "Una pausa durante il lavoro",
+    testo: "La gassosa era fatta per momenti così." },
   { quando: "1930", anno: true, titolo: "La bottiglia con la biglia", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
     testo: "Una pallina di vetro chiudeva il collo, prima dei tappi meccanici. Sul vetro, in rilievo, c'era soltanto il nome del produttore: le etichette non esistevano ancora." },
@@ -407,6 +408,7 @@ function Timeline() {
           <div className="tappa__testo">
             {t.quando && <p className={`tappa__quando display ${t.anno ? "is-anno" : ""} ${t.oggi ? "is-oggi" : ""}`}>{t.quando}</p>}
             <h3 className={`display h-md ${t.quando ? "mt-4" : ""}`}>{t.titolo}</h3>
+            {t.sottotitolo && <p className="tappa__sotto">{t.sottotitolo}</p>}
             <p className="soft measure">{t.testo}</p>
           </div>
         </li>
