@@ -349,7 +349,7 @@ const TAPPE = [
     testo: "La chiusura a pallina era il segno delle gassose di quel tempo, e anche i Di Pasquale la producevano così, con il nome della famiglia in rilievo sul vetro." },
   { titolo: "Giorni di festa", sottotitolo: "Una bibita per tutti", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
     alt: "Giovani in festa davanti alla chiesa, con le bottiglie alzate",
-    testo: "Non solo nei campi: la gassosa c'era anche quando il paese si ritrovava in piazza." },
+    testo: "Dalle pause nei campi alle feste in paese: la gassosa era di tutti." },
   { quando: "1949", anno: true, titolo: "Il tappo meccanico", bottiglia: "1949", w: 156,
     alt: "Bottiglia con tappo meccanico e la scritta in rilievo Giuseppe di Pasquale Gassose Bovino",
     testo: "Al posto della biglia arrivò il tappo a leva. Giuseppe conserva ancora i vecchi tappi con il nome della famiglia." },
