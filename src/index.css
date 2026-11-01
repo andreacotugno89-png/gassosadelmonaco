@@ -9,8 +9,8 @@
   --cream: #fbefdd;        /* la carta dell'etichetta */
   --paper: #fff6ea;        /* il testo sul magenta: 4,9:1 */
   --paper-soft: rgba(255, 246, 234, 0.9);
-  --rosa: #f6cfd9;         /* gli altri due fondi della pagina */
-  --menta: #cde8dc;
+  --beige: #f0e4d0;        /* gli altri due fondi della pagina: il beige dell'etichetta e il bianco */
+  --bianco: #ffffff;
   --vetrina: #f5e9d9;      /* la carta del volantino "Dal 1912": il fondo delle bottiglie */
 
   --font-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
@@ -22,7 +22,7 @@
 }
 
 /* ---------- I quattro colori ----------
-   Ogni sezione ha il suo fondo: magenta, verde, rosa, menta. La pagina prende il colore
+   Ogni sezione ha il suo fondo: magenta, verde, beige, bianco. La pagina prende il colore
    della sezione al centro dello schermo e ci sfuma (le variabili sono registrate con
    @property, quindi la transizione funziona anche sui colori). */
 @property --t-bg      { syntax: "<color>"; inherits: true; initial-value: #d23566; }
@@ -41,11 +41,11 @@ html[data-theme="verde"], html[data-theme="hero"][data-fase="verde"] {
   --t-bg: var(--green); --t-ink: var(--cream); --t-soft: rgba(251, 239, 221, 0.88);
   --t-acc: var(--pink); --t-btn: var(--magenta); --t-btn-ink: #fff; --t-line: rgba(251, 239, 221, 0.25);
 }
-html[data-theme="rosa"], html[data-theme="menta"] {
-  --t-bg: var(--rosa); --t-ink: var(--green); --t-soft: #2a5a53;
+html[data-theme="beige"], html[data-theme="bianco"] {
+  --t-bg: var(--beige); --t-ink: var(--green); --t-soft: #2a5a53;
   --t-acc: var(--magenta-ink); --t-btn: var(--magenta-ink); --t-btn-ink: #fff; --t-line: rgba(14, 74, 67, 0.22);
 }
-html[data-theme="menta"] { --t-bg: var(--menta); }
+html[data-theme="bianco"] { --t-bg: var(--bianco); }
 
 html {
   scrollbar-gutter: stable;   /* lo spazio della barra di scorrimento è sempre riservato: la pagina non si sposta */
@@ -356,5 +356,8 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 
 .logo-paper { filter: brightness(0) invert(1); }
 html[data-theme="hero"] .nav { background: transparent; }
+/* sul bianco e sul beige il logo bianco sparirebbe: lì il menu diventa una fascia verde */
+html[data-tone="light"] .nav { background: var(--green); color: var(--cream); }
+html[data-tone="light"] .nav .btn--theme { background: var(--magenta); color: #fff; }
 /* nella prima schermata il pulsante del menu è color carta: si legge sul magenta e sul verde, anche a metà passaggio */
 html[data-theme="hero"] .nav .btn--theme { background: var(--paper); color: var(--green); }

@@ -83,11 +83,11 @@ Il verde sul magenta ha poco contrasto (2:1): si usa solo per parole giganti com
 
 ### I quattro fondi, scorrendo
 
-Le quattro proposte di colore (magenta, verde, rosa `#f6cfd9`, menta `#cde8dc`) convivono: ogni sezione dichiara il suo fondo (`data-theme`) e la pagina sfuma verso il colore della sezione al centro dello schermo, testi e pulsanti compresi (variabili `--t-*` registrate con `@property`).
+Quattro fondi convivono (magenta, verde, il beige dell'etichetta `#f0e4d0` e il bianco `#ffffff`; il rosa e il menta chiari sono stati scartati): ogni sezione dichiara il suo fondo (`data-theme`) e la pagina sfuma verso il colore della sezione al centro dello schermo, testi e pulsanti compresi (variabili `--t-*` registrate con `@property`).
 
 - **Prima schermata**: all'apertura la bottiglia è ferma, di fronte. Un solo gesto di scroll (rotella, dito o tasto) dalla cima fa partire il passaggio, che dura 2 secondi e va avanti da solo: la pagina non scorre finché non finisce (né la coda della rotella, né il resto del gesto col dito): il cerchio verde si allarga dalla bottiglia fino a coprire la schermata e il menu, la bottiglia fa un giro intero, e MONACO diventa rosa esattamente dove il cerchio la copre (il cerchio, un verde pieno, sta sotto la scritta, che resta sempre la stessa; sopra c'è solo una seconda MONACO rosa ritagliata dallo stesso cerchio, così alla prima apertura la scritta non sparisce mai). Poi la pagina scorre normalmente; tornando in cima, un gesto verso l'alto riavvolge il passaggio. Con "riduci movimento" il passaggio è immediato.
 - **Nastro**: carta, sopra il verde.
-- **Storia, linea del tempo**: il titolo su menta, poi ogni tappa ha il suo fondo (menta, rosa, verde, magenta, menta, verde, rosa) e la pagina cambia colore a ogni tappa. **E il monaco?** (con il racconto di Montevergine): magenta. **Ricetta**: verde. **Ordini**: rosa. **Footer**: verde.
+- **Storia, linea del tempo**: il titolo sul bianco, poi ogni tappa ha il suo fondo (bianco, beige, verde, magenta, bianco, verde, beige) e la pagina cambia colore a ogni tappa. **E il monaco?** (con il racconto di Montevergine): magenta. **Ricetta**: verde. **Ordini**: beige. **Footer**: verde.
 - Il logo nel menu resta sempre bianco, su ogni fondo (scelta della famiglia). Sui fondi chiari gli accenti al magenta per testo `#c42a5c` (solo su testo grande; il testo piccolo resta verde).
 
 ## Caratteri

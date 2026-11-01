@@ -368,8 +368,8 @@ const TAPPE = [
 ];
 
 /* il fondo di ogni tappa, in ordine: la pagina cambia colore mentre si scorre la storia
-   (il 2026 sta sul rosa, dove il magenta dell'anno si legge bene) */
-const TEMI_TAPPE = ["menta", "rosa", "verde", "magenta", "menta", "verde", "rosa"];
+   (il 2026 sta sul beige, dove il magenta dell'anno si legge bene) */
+const TEMI_TAPPE = ["bianco", "beige", "verde", "magenta", "bianco", "verde", "beige"];
 
 function Timeline() {
   const ref = useRef(null);
@@ -426,7 +426,7 @@ function Timeline() {
 /* ---------- il colore della pagina segue la sezione al centro dello schermo ---------- */
 /* Ogni sezione dichiara il suo colore (data-theme). La prima schermata ha il suo passaggio
    dal magenta al verde (usePassaggio). */
-const TONO = { hero: "dark", magenta: "dark", verde: "dark", rosa: "light", menta: "light" };
+const TONO = { hero: "dark", magenta: "dark", verde: "dark", beige: "light", bianco: "light" };
 function useTemaScorrendo() {
   useEffect(() => {
     const root = document.documentElement;
@@ -534,7 +534,7 @@ export default function App() {
         {/* ===================== STORIA: la linea del tempo ===================== */}
         <section id="storia" className="py-24 md:py-36">
           <div className="wrap">
-            <div data-theme="menta">
+            <div data-theme="bianco">
               <h2 className="display h-xl">Dal 1912. <span className="acc">Una storia che continua.</span></h2>
               <p className="lead measure mt-8 mb-0">Dal ghiaccio di Manfredonia alla bottiglia di oggi: la gassosa di Bovino, come la racconta la famiglia.</p>
             </div>
@@ -576,7 +576,7 @@ export default function App() {
         </section>
 
         {/* ===================== ORDINI ===================== */}
-        <section id="contatti" data-theme="rosa" className="py-24 md:py-36">
+        <section id="contatti" data-theme="beige" className="py-24 md:py-36">
           <div className="wrap">
             <h2 className="display h-xl">Ordinala.</h2>
             <p className="lead mt-6 mb-0 measure">Ritrova il gusto di una volta. Per informazioni e ordini, scrivici una email: ti rispondiamo noi.</p>
