@@ -339,28 +339,24 @@ function Ingredients({ items }) {
 const TAPPE = [
   { quando: "1912", anno: true, titolo: "Il Monaco insegna la gassosa", bottiglia: "1912", w: 230,
     alt: "Sifone da seltz in vetro blu con la testa incisa Di Pasquale Bovino",
-    didascalia: "Il sifone da seltz, con la testa incisa “Di Pasquale Bovino”",
     testo: "A inizio Novecento il nonno, Giuseppe di Pasquale, vendeva il vino nell'osteria di famiglia e il ghiaccio comprato a Manfredonia, tenuto nelle neviere fino all'estate. Lì, racconta la famiglia, suo zio, il «mancato monaco», gli insegnò a fare la gassosa." },
   { quando: "Il segreto", titolo: "Il succo di limone", foto: ASSETS.storia1, w: 1280, h: 927, tilt: "-2deg",
     alt: "Ragazzi e uomini in posa durante la trebbiatura, con un cavallo e la trebbiatrice",
     testo: "Molti paesi avevano la loro gassosa. Quella dei Di Pasquale aveva un segreto: il succo di limone, pensato sui gusti della gente che passava dall'osteria." },
   { quando: "1930", anno: true, titolo: "La bottiglia con la biglia", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
-    didascalia: "In rilievo: “Di Pasquale Giuseppe · Gassose · Bovino”",
     testo: "Una pallina di vetro chiudeva il collo, prima dei tappi meccanici. Sul vetro, in rilievo, c'era soltanto il nome del produttore: le etichette non esistevano ancora." },
   { quando: "Oltre Bovino", titolo: "Per i paesi del Subappennino", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
     alt: "Giovani in festa davanti alla chiesa, con le bottiglie alzate",
     testo: "La gassosa girava per i paesi del Subappennino: Giuseppe ne ha ritrovato tracce a Orsara di Puglia e a Deliceto. E il nonno insegnò il mestiere anche ad altri produttori." },
   { quando: "1949", anno: true, titolo: "Il tappo meccanico", bottiglia: "1949", w: 156,
     alt: "Bottiglia con tappo meccanico e la scritta in rilievo Giuseppe di Pasquale Gassose Bovino",
-    didascalia: "In rilievo: “Giuseppe di Pasquale · Gassose · Bovino”",
     testo: "Al posto della biglia arrivò il tappo a leva. Giuseppe conserva ancora i vecchi tappi con il nome della famiglia." },
   { quando: "Anni Sessanta", titolo: "Arriva la modernità", foto: ASSETS.storia3, w: 1280, h: 883, tilt: "-1.5deg",
     alt: "La famiglia riunita attorno a un tavolo con le bottiglie di gassosa al centro",
     testo: "Con i frigoriferi il ghiaccio serviva sempre meno, e arrivavano Coca-Cola, aranciata e birra. La gassosa si fece fino agli anni Sessanta, poi la famiglia passò alla distribuzione di bevande. La ricetta restò in casa." },
   { quando: "2026", anno: true, oggi: true, titolo: "Di nuovo in bottiglia", bottiglia: "2026", w: 146,
     alt: "La bottiglia di oggi, Gassosa del Monaco",
-    didascalia: "Gassosa del Monaco",
     testo: "Giuseppe di Pasquale ha conservato bottiglie, tappi, sifoni e i racconti degli zii. Dopo 114 anni la ricetta torna in bottiglia: sull'etichetta, un saio vuoto da cui salgono le bollicine." },
 ];
 
@@ -403,10 +399,9 @@ function Timeline() {
                   <img src={`/assets/bottiglie/bottiglia-${t.bottiglia}.webp`} width={t.w} height="695" loading="lazy" decoding="async"
                     alt={t.alt} style={{ aspectRatio: `${t.w} / 695` }} />
                 </div>
-                <figcaption>{t.didascalia}</figcaption>
               </figure>
             ) : (
-              <Print src={t.foto} width={t.w} height={t.h} tilt={t.tilt} alt={t.alt} label={t.label} caption={t.didascalia} />
+              <Print src={t.foto} width={t.w} height={t.h} tilt={t.tilt} alt={t.alt} />
             )}
           </div>
           <div className="tappa__testo">
