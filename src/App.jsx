@@ -344,9 +344,9 @@ const TAPPE = [
     alt: "Ragazzi e uomini in posa durante la trebbiatura, con un cavallo e la trebbiatrice",
     sottotitolo: "Una pausa durante il lavoro",
     testo: "La gassosa era fatta per momenti così, semplici, di tutti i giorni." },
-  { quando: "1930", anno: true, titolo: "La bottiglia con la biglia", bottiglia: "1930", w: 124,
+  { quando: "1930", anno: true, titolo: "Il nome sul vetro", sottotitolo: "Prima delle etichette", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
-    testo: "Una pallina di vetro chiudeva il collo, prima dei tappi meccanici. Sul vetro, in rilievo, c'era soltanto il nome del produttore: le etichette non esistevano ancora." },
+    testo: "Non c'erano marchi né etichette: a fare la gassosa bastava il nome della famiglia." },
   { quando: "Oltre Bovino", titolo: "Per i paesi del Subappennino", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
     alt: "Giovani in festa davanti alla chiesa, con le bottiglie alzate",
     testo: "La gassosa girava per i paesi del Subappennino: Giuseppe ne ha ritrovato tracce a Orsara di Puglia e a Deliceto. E il nonno insegnò il mestiere anche ad altri produttori." },
@@ -408,7 +408,7 @@ function Timeline() {
           <div className="tappa__testo">
             {t.quando && <p className={`tappa__quando display ${t.anno ? "is-anno" : ""} ${t.oggi ? "is-oggi" : ""}`}>{t.quando}</p>}
             <h3 className={`display h-md ${t.quando ? "mt-4" : ""}`}>{t.titolo}</h3>
-            {t.sottotitolo && <p className="tappa__sotto">{t.sottotitolo}</p>}
+            {t.sottotitolo && <p className="tappa__sotto display h-md">{t.sottotitolo}</p>}
             <p className="soft measure">{t.testo}</p>
           </div>
         </li>
