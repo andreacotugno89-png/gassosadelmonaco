@@ -356,9 +356,9 @@ const TAPPE = [
   { quando: "Anni 60", titolo: "Tempi nuovi", foto: ASSETS.storia3, w: 1280, h: 883, tilt: "-1.5deg",
     alt: "La famiglia riunita attorno a un tavolo con le bottiglie di gassosa al centro",
     testo: "Arrivarono i frigoriferi e le bibite industriali. La gassosa si fece ancora per qualche anno, ma piano piano la famiglia si dedicò soltanto alla distribuzione di bevande. La ricetta restò in casa, in attesa." },
-  { quando: "2026", anno: true, oggi: true, titolo: "Di nuovo in bottiglia", bottiglia: "2026", w: 146,
+  { quando: "2026", anno: true, oggi: true, titolo: "Di nuovo in bottiglia", sottotitolo: "Una storia che continua", bottiglia: "2026", w: 146,
     alt: "La bottiglia di oggi, Gassosa del Monaco",
-    testo: "Giuseppe di Pasquale ha conservato bottiglie, tappi, sifoni e i racconti degli zii. Dopo 114 anni la ricetta torna in bottiglia: sull'etichetta, un saio vuoto da cui salgono le bollicine." },
+    testo: "Oggi la famiglia riporta in bottiglia la gassosa di allora, e nasce la Gassosa del Monaco." },
 ];
 
 /* il fondo di ogni tappa, in ordine: la pagina cambia colore mentre si scorre la storia
