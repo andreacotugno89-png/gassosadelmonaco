@@ -19,6 +19,7 @@ const CONTATTI = {
   email:     "dipasquale1912@gmail.com",
   tel:       "+39 333 381 5608",
   telHref:   "+393333815608",
+  instagram: "dipasquale1912",
 };
 
 /* Gli ordini passano per email: oggetto e testo già scritti */
@@ -598,10 +599,12 @@ export default function App() {
         </section>
       </main>
 
-      {/* ===================== FOOTER: solo il logo, sempre sul verde ===================== */}
+      {/* ===================== FOOTER: il logo e Instagram, sempre sul verde ===================== */}
       <footer className="footer py-12">
-        <div className="wrap flex justify-center">
+        <div className="wrap flex flex-col items-center gap-6">
           <img src={ASSETS.logoWhite} alt="Di Pasquale 1912" width="1200" height="360" loading="lazy" className="h-12 md:h-14 w-auto" />
+          <a href={`https://www.instagram.com/${CONTATTI.instagram}/`} target="_blank" rel="noopener"
+            aria-label={`Instagram, @${CONTATTI.instagram}`} className="footer__ig"><Icon name="camera" /></a>
         </div>
       </footer>
     </div>
