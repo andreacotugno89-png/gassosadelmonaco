@@ -346,7 +346,7 @@ const TAPPE = [
     testo: "La gassosa era fatta per momenti così, semplici, di tutti i giorni." },
   { quando: "Anni 30", titolo: "La bottiglia con la pallina", sottotitolo: "Un'icona di quegli anni", bottiglia: "1930", w: 124,
     alt: "Bottiglia in vetro con la biglia nel collo e la scritta in rilievo Di Pasquale Giuseppe Gassose Bovino",
-    testo: "La chiusura a pallina era il segno delle gassose di quel tempo, e anche i Di Pasquale la producevano così. Lo testimonia questa bottiglia, con il nome della famiglia ancora in rilievo sul vetro." },
+    testo: "La chiusura a pallina era il segno delle gassose di quel tempo, e anche i Di Pasquale la producevano così, con il nome della famiglia in rilievo sul vetro." },
   { quando: "Oltre Bovino", titolo: "Per i paesi del Subappennino", foto: ASSETS.storia2, w: 511, h: 800, tilt: "2deg",
     alt: "Giovani in festa davanti alla chiesa, con le bottiglie alzate",
     testo: "La gassosa girava per i paesi del Subappennino: Giuseppe ne ha ritrovato tracce a Orsara di Puglia e a Deliceto. E il nonno insegnò il mestiere anche ad altri produttori." },
