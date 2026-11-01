@@ -40,7 +40,6 @@ function Icon({ name }) {
       {name === "camera" && <><rect {...p} x="3.5" y="3.5" width="17" height="17" rx="5" /><circle {...p} cx="12" cy="12" r="4" /><circle cx="17" cy="7" r="1" fill="currentColor" /></>}
       {name === "menu" && <path {...p} d="M4 7h16M4 12h16M4 17h16" />}
       {name === "close" && <path {...p} d="M6 6l12 12M18 6L6 18" />}
-      {name === "bubbles" && <><circle {...p} cx="9" cy="14" r="5" /><circle {...p} cx="17" cy="7" r="3" /><circle {...p} cx="18" cy="16.5" r="1.6" /></>}
     </svg>
   );
 }
@@ -327,7 +326,7 @@ function Ingredients({ items }) {
   return (
     <ul ref={ref} className="ingredients">
       {items.map((it) => (
-        <li key={it} className="display"><span>{it}</span><Icon name="bubbles" /></li>
+        <li key={it} className="display"><span>{it}</span></li>
       ))}
     </ul>
   );

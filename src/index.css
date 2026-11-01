@@ -322,7 +322,10 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
   padding-block: 1.1rem; border-bottom: 2px solid var(--t-line);
   font-size: clamp(2.2rem, 4.6vw, 4rem);
 }
-.ingredients li svg { width: 0.7em; height: 0.7em; color: var(--t-acc); flex: none; }
+/* ogni ingrediente ha il suo colore: l'acqua azzurra, lo zucchero bianco, il limone giallo */
+.ingredients li:nth-child(1) { color: #8fd0f2; }
+.ingredients li:nth-child(2) { color: #ffffff; }
+.ingredients li:nth-child(3) { color: #f6d548; }
 .js .ingredients li { transition: transform 0.9s var(--ease-out), clip-path 0.9s var(--ease-out); }
 @media (prefers-reduced-motion: no-preference) {
   .js .ingredients:not(.is-in) li { transform: translateX(-1.5rem); clip-path: inset(0 100% 0 0); }
