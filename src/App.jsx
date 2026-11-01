@@ -569,7 +569,7 @@ export default function App() {
 
         {/* ===================== ORDINI: la cartolina ===================== */}
         {/* Come le foto d'archivio, una cartolina un po' storta: a sinistra si sceglie chi si è
-           (la email parte già scritta), a destra i recapiti al posto dell'indirizzo, il tappo come francobollo. */}
+           (la email parte già scritta), a destra i recapiti al posto dell'indirizzo, il logo nero come francobollo. */}
         <section id="contatti" data-theme="beige" className="py-24 md:py-36">
           <div className="wrap">
             <h2 className="display h-xl text-center">Ordinala<span className="acc">.</span></h2>
@@ -581,7 +581,6 @@ export default function App() {
               </div>
               <div className="cartolina__indirizzo">
                 <img src={ASSETS.seal} alt="" width="800" height="800" loading="lazy" className="cartolina__francobollo" />
-                <div className="cartolina__timbro" aria-hidden="true"><span>Bovino<b>1912</b>Gassose</span></div>
                 <dl className="cartolina__righe">
                   {[
                     ["Email", `mailto:${CONTATTI.email}`, CONTATTI.email],

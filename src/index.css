@@ -357,12 +357,6 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .cartolina__btn.is-pieno:hover { background: var(--magenta-d); border-color: var(--magenta-d); }
 .cartolina__indirizzo { position: relative; display: flex; flex-direction: column; }
 .cartolina__francobollo { align-self: flex-end; width: clamp(6rem, 11vw, 8.5rem); height: auto; }
-.cartolina__timbro {
-  position: absolute; top: 0; right: clamp(7rem, 12vw, 10rem); width: 7.5rem; height: 7.5rem; display: grid; place-items: center;
-  border: 3px solid var(--magenta-ink); border-radius: 50%; color: var(--magenta-ink); opacity: 0.8; transform: rotate(-14deg);
-  font: 600 0.8rem/1.2 "Montserrat", var(--font-body); text-transform: uppercase; text-align: center;
-}
-.cartolina__timbro b { display: block; font: 800 1.6rem/1 var(--font-display); }
 .cartolina__righe { margin: auto 0 0; padding-top: 1rem; }
 .cartolina__righe > div { padding: 0.8rem 0 0.45rem; border-bottom: 2px solid rgba(14, 74, 67, 0.25); }
 .cartolina__righe dt { font-size: 0.85rem; font-weight: 500; color: #2a5a53; }
@@ -371,7 +365,7 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.
 .cartolina__righe a:hover { text-decoration: underline; }
 @media (max-width: 767px) {
   .cartolina { grid-template-columns: minmax(0, 1fr); transform: rotate(-1deg); }
-  .cartolina::before, .cartolina__timbro { display: none; }
+  .cartolina::before { display: none; }
   .cartolina__indirizzo { position: static; margin-top: 1.75rem; padding-top: 0.5rem; border-top: 2px solid rgba(14, 74, 67, 0.18); }
   .cartolina__francobollo { position: absolute; top: -2.2rem; right: -0.8rem; width: 5.5rem; }
   .cartolina__msg p { padding-right: 3.5rem; }   /* il testo non finisce sotto il francobollo */
