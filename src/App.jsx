@@ -567,7 +567,6 @@ export default function App() {
             <div className="photo">
               <img src={ASSETS.lifestyle} alt="Gassosa del Monaco servita in due bicchieri con limone e menta, accanto a una ciotola di limoni"
                 width="1122" height="1402" loading="lazy" decoding="async" />
-              <div className="sticker" aria-hidden="true"><img src={ASSETS.seal} alt="" width="800" height="800" loading="lazy" /></div>
             </div>
           </div>
         </section>
